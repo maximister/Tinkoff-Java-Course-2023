@@ -10,14 +10,19 @@ import java.io.*;
 public class PrinterTest {
     @Test
     @DisplayName("Проверка класса Printer")
-    @Disabled
     public void printerTest() {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
             System.setOut(new PrintStream(os, false, "UTF-8"));
             Printer printer = new Printer();
             printer.printMessage("Hello world!");
-            assertThat(os.toString("UTF-8")).isEqualTo("-> Hello world!\r\n");
+
+            String systemName = System.getProperty("os.name");
+            if (systemName.contains("Windows")) {
+                assertThat(os.toString("UTF-8")).isEqualTo("-> Hello world!\r\n");
+            } else {
+                assertThat(os.toString("UTF-8")).isEqualTo("-> Hello world!\n");
+            }
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
