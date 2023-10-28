@@ -3,11 +3,13 @@ package edu.hw4;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Solution {
+    private static final String INVALID_ARGUMENT_MESSAGE = "Invalid value of K";
     private Solution() {
     }
 
@@ -18,6 +20,9 @@ public class Solution {
 
     //task2
     public static List<Animal> getKHeaviestAnimals(List<Animal> animals, int k) {
+        if (k < 0) {
+            throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE);
+        }
         return animals.stream().sorted(Comparator.comparingInt(Animal::weight).reversed()).limit(k).toList();
     }
 
@@ -42,10 +47,37 @@ public class Solution {
     public static Map<Animal.Type, Animal> getHeaviestAnimalOfEachType(List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.toMap(Animal::type, Function.identity(),
-                BinaryOperator.maxBy(Comparator.comparing(Animal::weight))));
+                BinaryOperator.maxBy(Comparator.comparing(Animal::weight))
+            ));
     }
 
     //task7
+    public static Animal getKthOldestAnimal(List<Animal> animals, int k) {
+        if (k <= 0 || k > animals.size()) {
+            throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE);
+        }
+        return animals.stream()
+            .sorted(Comparator.comparingInt(Animal::age))
+            .skip(k - 1)
+            .findFirst()
+            .orElseThrow(IllegalArgumentException::new);
+    }
+
+    //task8
+    public static Optional<Animal> getHeaviestAnimalLowerThanK(List<Animal> animals, int k) {
+        if (k <= 0) {
+            throw new IllegalArgumentException("K must be bigger than 0");
+        }
+
+        return animals.stream().filter(a -> a.height() < k).max(Comparator.comparingInt(Animal::weight));
+    }
+
+    //task9
+    public static Integer getSumOfPaws(List<Animal> animals) {
+        return animals.stream().mapToInt(Animal::paws).sum();
+    }
+
+    //task10
 
     /*public static void main(String[] args) {
         Animal c = new Animal("Dora", Animal.Type.CAT, Animal.Sex.F, 5, 30, 20, false);
@@ -56,6 +88,6 @@ public class Solution {
 
         List<Animal> testList = List.of(c, d, p, f, s);
 
-        System.out.println(getHeaviestAnimalOfEachType(testList).toString());
-    }*/
+        System.out.println(getSumOfPaws(testList).toString());
+    } */
 }
