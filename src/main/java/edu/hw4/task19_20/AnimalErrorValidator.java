@@ -13,7 +13,7 @@ public class AnimalErrorValidator {
         new ValidationError.AgeValidationError("Age must be positive integer!"),
         new ValidationError.WeightValidationError("Weight must be natural numder!"),
         new ValidationError.SexValidationError("You live in Russia, so your animal can not be non-binary person!")
-        );
+    );
 
     private AnimalErrorValidator() {
     }
@@ -34,9 +34,12 @@ public class AnimalErrorValidator {
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static  Map<String, String> checkAnimalsWithReadableInput(List<Animal> animals) {
+    public static Map<String, String> checkAnimalsWithReadableInput(List<Animal> animals) {
         return checkAnimals(animals).entrySet().stream()
-            .collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().toString()));
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                (e) -> e.getValue().toString().replace("]", "").replace("[", "")
+            ));
     }
 
 }

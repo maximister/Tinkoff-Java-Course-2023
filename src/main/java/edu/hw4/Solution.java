@@ -9,12 +9,12 @@ import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import static edu.hw4.task19_20.AnimalErrorValidator.checkAnimals;
-import static edu.hw4.task19_20.AnimalErrorValidator.checkAnimalsWithReadableInput;
+
 
 //solutions for tasks 1 - 18
 public class Solution {
     private static final String INVALID_ARGUMENT_MESSAGE = "Invalid value of K";
+    private static final String INVALID_ARGUMENTS_MESSAGE = "K and L must be bigger or equal to 0!";
     private static final int VERY_DANGEROUS_ANIMAL_HEIGHT = 100;
 
     private Solution() {
@@ -128,6 +128,10 @@ public class Solution {
     Сделал оба варианта)
      */
     public static Integer getTotalWeightOfAnimalsWithAgeBetweenKAndL(List<Animal> animals, int k, int l) {
+        if (k < 0 || l < 0 || l < k) {
+            throw new IllegalArgumentException(INVALID_ARGUMENTS_MESSAGE);
+        }
+
         return animals.stream().filter((a) -> (a.age() >= k && a.age() <= l)).mapToInt(Animal::weight).sum();
     }
 
@@ -137,8 +141,8 @@ public class Solution {
         int k,
         int l
     ) {
-        if (k < 0 || l < 0) {
-            throw new IllegalArgumentException("K and L must be bigger or equal to 0!");
+        if (k < 0 || l < 0 || l < k) {
+            throw new IllegalArgumentException(INVALID_ARGUMENTS_MESSAGE);
         }
 
         return animals.stream().filter((a) -> (a.age() >= k && a.age() <= l))
@@ -175,16 +179,4 @@ public class Solution {
             .filter((a) -> (a.type() == Animal.Type.FISH))
             .max(Comparator.comparingInt(Animal::weight)).orElseThrow();
     }
-
-    /*public static void main(String[] args) {
-        Animal c = new Animal("Bites The Dust", Animal.Type.CAT, Animal.Sex.F, 4, 200, 20, true);
-        Animal d = new Animal("Oleg", Animal.Type.DOG, Animal.Sex.F, -2, -37, -13, true);
-        Animal p = new Animal("Sanechka", Animal.Type.BIRD, Animal.Sex.M, 4, 10, 1, false);
-        Animal f = new Animal("Ivan Zolo", Animal.Type.FISH, Animal.Sex.M, 43, 20, 121, false);
-        Animal s = new Animal("Goshan", Animal.Type.SPIDER, Animal.Sex.M, 19, 2, 12, true);
-
-        List<Animal> testList = List.of(c, d, p, f, s);
-
-        System.out.println(checkAnimalsWithReadableInput(testList));
-    }*/
 }
