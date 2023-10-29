@@ -339,7 +339,8 @@ public class SolutionTest {
 
         Map<String, Set<ValidationError>> expected = Map.of(
             "Bites The Dust", Set.of(new ValidationError.AgeValidationError("Age must be positive integer!")),
-            "Dora", Set.of(new ValidationError.WeightValidationError("Weight must be natural numder!")),
+            "Andrew", Set.of(new ValidationError.HeightValidationError("Height must be natural number!")),
+            "Dora", Set.of(new ValidationError.WeightValidationError("Weight must be natural number!")),
             " ", Set.of(new ValidationError.NameValidationError("Name must not be empty!")),
             "Nikitos", Set.of(new ValidationError.SexValidationError
                 ("You live in Russia, so your animal can not be non-binary person!"))
@@ -356,7 +357,8 @@ public class SolutionTest {
 
         Map<String, String> expected = Map.of(
             "Bites The Dust", "Age: " + "Age must be positive integer!",
-            "Dora", "Weight: " + "Weight must be natural numder!",
+            "Andrew", "Height: " + "Height must be natural number!",
+            "Dora", "Weight: " + "Weight must be natural number!",
             " ", "Name: " + "Name must not be empty!",
             "Nikitos", "Sex: " + "You live in Russia, so your animal can not be non-binary person!"
         );
@@ -366,12 +368,13 @@ public class SolutionTest {
 
     private static Stream<Arguments> generateAnimalListWithInvalidElements() {
         Animal c = new Animal("Bites The Dust", Animal.Type.CAT, Animal.Sex.M, -4, 200, 20, true);
+        Animal c1 = new Animal("Andrew", Animal.Type.CAT, Animal.Sex.M, 4, -200, 20, true);
         Animal c2 = new Animal("Dora", Animal.Type.CAT, Animal.Sex.F, 16, 40, -50, true);
         Animal d = new Animal(" ", Animal.Type.DOG, Animal.Sex.F, 2, 37, 13, true);
         Animal d2 = new Animal("Nikitos", Animal.Type.DOG, null, 13, 120, 130, true);
         Animal b = new Animal("Sanechka", Animal.Type.BIRD, Animal.Sex.M, 4, 10, 1, false);
 
-        List<Animal> testList = List.of(c, c2, d, d2, b);
+        List<Animal> testList = List.of(c, c1, c2, d, d2, b);
 
         return Stream.of(
             Arguments.of(new ArrayList<>(testList))

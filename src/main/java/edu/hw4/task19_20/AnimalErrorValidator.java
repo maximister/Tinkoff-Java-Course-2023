@@ -11,7 +11,7 @@ public class AnimalErrorValidator {
         new ValidationError.HeightValidationError("Height must be natural number!"),
         new ValidationError.NameValidationError("Name must not be empty!"),
         new ValidationError.AgeValidationError("Age must be positive integer!"),
-        new ValidationError.WeightValidationError("Weight must be natural numder!"),
+        new ValidationError.WeightValidationError("Weight must be natural number!"),
         new ValidationError.SexValidationError("You live in Russia, so your animal can not be non-binary person!")
     );
 
