@@ -1,5 +1,8 @@
 package edu.hw4;
 
+import com.google.common.primitives.Ints;
+import org.checkerframework.checker.units.qual.A;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,8 @@ import java.util.stream.Collectors;
 
 public class Solution {
     private static final String INVALID_ARGUMENT_MESSAGE = "Invalid value of K";
+    private static final int VERY_DANGEROUS_ANIMAL_HEIGHT = 100;
+
     private Solution() {
     }
 
@@ -69,18 +74,111 @@ public class Solution {
             throw new IllegalArgumentException("K must be bigger than 0");
         }
 
-        return animals.stream().filter(a -> a.height() < k).max(Comparator.comparingInt(Animal::weight));
+        return animals.stream()
+            .filter(a -> a.height() < k)
+            .max(Comparator.comparingInt(Animal::weight));
     }
 
     //task9
     public static Integer getSumOfPaws(List<Animal> animals) {
+
         return animals.stream().mapToInt(Animal::paws).sum();
     }
 
     //task10
+    public static List<Animal> getListOfAnimalsWhoseAgeAreNotEqualToPaws(List<Animal> animals) {
+        return animals.stream().filter(a -> (a.age() != a.paws())).toList();
+    }
+
+    //task11
+    public static List<Animal> getBitesTheDustList(List<Animal> animals) {
+        /*
+        (bites == null или true)
+        этот пункт не совсем понял, bites же примив, какой еще null
+         */
+        return animals.stream().filter((a) -> (a.bites() && a.height() > VERY_DANGEROUS_ANIMAL_HEIGHT)).toList();
+    }
+
+    //task12
+    public static Integer countFatAnimals(List<Animal> animals) {
+        return Ints.checkedCast(animals.stream().filter((a) -> (a.height() < a.weight())).count());
+    }
+
+    //task13
+    public static List<Animal> getAnimalsWithLongFullName(List<Animal> animals) {
+        return animals.stream().filter((a) -> (a.name().split(" ").length > 2)).toList();
+    }
+
+    //task14
+    public static Boolean hasDogHigherThanKInList(List<Animal> animals, int k) {
+        if (k <= 0) {
+            throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE);
+        }
+        return animals.stream().anyMatch((a) -> (a.height() > k));
+    }
+
+    //task15
+    /*
+    Найти суммарный вес животных каждого вида, которым от k до l лет -> Integer
+    Не совсем понял условие про каждый вид - нужно просто суммировать вес всех животных
+    или нужно найти суммарный вес для каждого вида? Судя по требуемому типу Integer,
+    нужен 1 вариант, судя по формулировке задачи - второй
+    Сделал оба варианта)
+     */
+    public static Integer getTotalWeightOfAnimalsWithAgeBetweenKAndL(List<Animal> animals, int k, int l) {
+        return animals.stream().filter((a) -> (a.age() >= k && a.age() <= l)).mapToInt(Animal::weight).sum();
+    }
+
+    //task15v2
+    public static Map<Animal.Type, Integer> getTotalWeightOfAnimalsWithAgeBetweenKAndLByTypes(
+        List<Animal> animals,
+        int k,
+        int l
+    ) {
+        if (k < 0 || l < 0) {
+            throw new IllegalArgumentException("K and L must be bigger or equal to 0!");
+        }
+
+        return animals.stream().filter((a) -> (a.age() >= k && a.age() <= l))
+            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
+    }
+
+    //task16
+    /*
+    Список животных, отсортированный по виду, затем по полу, затем по имени -> List<Integer>
+    не пон, почему Integer, заменил на Animal
+     */
+    public static List<Animal> sortAnimalsByTypeSexAndName(List<Animal> animals) {
+        return animals.stream().sorted(
+            Comparator.comparing(Animal::type)
+                .thenComparing(Animal::sex)
+                .thenComparing(Animal::name)
+        ).toList();
+    }
+
+    //task17
+    public static Boolean doSpidersBitesMoreOftenThanDogs(List<Animal> animals) {
+        long spidersBitesAmount = animals.stream()
+            .filter((a) -> (a.type() == Animal.Type.SPIDER && a.bites())).count();
+        long dogsBitesAmount = animals.stream()
+            .filter((a) -> (a.type() == Animal.Type.DOG && a.bites())).count();
+
+        return spidersBitesAmount >= dogsBitesAmount;
+    }
+
+    //task18
+    @SafeVarargs
+    public static Animal getHeaviestFish(List<Animal>... animals) {
+        return Arrays.stream(animals).flatMap(List::stream)
+            .filter((a) -> (a.type() == Animal.Type.FISH))
+            .max(Comparator.comparingInt(Animal::weight)).orElseThrow();
+    }
+
+    //task19
+
 
     /*public static void main(String[] args) {
-        Animal c = new Animal("Dora", Animal.Type.CAT, Animal.Sex.F, 5, 30, 20, false);
+        Animal c = new Animal("Bites The Dust", Animal.Type.CAT, Animal.Sex.F, 4, 200, 20, true);
         Animal d = new Animal("Oleg", Animal.Type.DOG, Animal.Sex.F, 2, 37, 13, true);
         Animal p = new Animal("Sanechka", Animal.Type.BIRD, Animal.Sex.M, 4, 10, 1, false);
         Animal f = new Animal("Ivan Zolo", Animal.Type.FISH, Animal.Sex.M, 43, 20, 121, false);
@@ -88,6 +186,6 @@ public class Solution {
 
         List<Animal> testList = List.of(c, d, p, f, s);
 
-        System.out.println(getSumOfPaws(testList).toString());
-    } */
+        System.out.println(getListOfAnimalsWhoseAgeAreNotEqualToPaws(testList).toString());
+    }*/
 }
