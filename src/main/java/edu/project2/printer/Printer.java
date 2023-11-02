@@ -1,10 +1,10 @@
 package edu.project2.printer;
 
-//делает бррррр
-/*
-можно использовать для вывода лабиринта
-■ □
- */
+import edu.project2.renderer.Renderer;
+
 public interface Printer {
     void printMessage(String message);
+
+    //TODO: заменить аргумент на результат работы рендера
+    void printMaze(Renderer renderResult);
 }
