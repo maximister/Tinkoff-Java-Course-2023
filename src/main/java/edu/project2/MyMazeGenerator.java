@@ -33,12 +33,12 @@ public class MyMazeGenerator {
 
     private void run() {
         printer.printMessage(ConsoleMessages.WELCOME_MESSAGE.getMessage());
-        printer.printMessage(ConsoleMessages.EXIT_COMMAND.getMessage());
         String command;
         Integer[] sizes;
         Coordinate[] coordinates;
 
         while (true) {
+            printer.printMessage(ConsoleMessages.EXIT_COMMAND.getMessage());
             printer.printMessage(ConsoleMessages.SELECT_SIZE.getMessage());
             command = reader.getInput();
 
@@ -56,12 +56,13 @@ public class MyMazeGenerator {
 
             //printing generated maze
             printer.printMessage(ConsoleMessages.GENERATED_MAZE_MESSAGE.getMessage());
-            printer.printMaze(mazeRenderer.render(maze));
+            String deletThisHueta = mazeRenderer.render(maze);
+            printer.printMaze(deletThisHueta);
 
             //getting start and end Cells
             printer.printMessage(ConsoleMessages.SELECT_COORDINATES.getMessage());
             command = reader.getInput();
-            coordinates = inputHandler.parseCoordinates(command, sizes[0], sizes[1]);
+            coordinates = inputHandler.parseCoordinates(command, sizes[0], sizes[1], maze.getGrid());
 
             //solving maze
             printer.printMessage(ConsoleMessages.SELECT_SOLVER.getMessage());

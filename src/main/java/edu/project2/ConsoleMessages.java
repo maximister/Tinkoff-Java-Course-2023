@@ -7,9 +7,9 @@ public enum ConsoleMessages {
     SELECT_SOLVER("Выберите алгоритм решения лабиринта:\n" + "1) DFS\n" + "2) что-то еще\n"),
     GENERATED_MAZE_MESSAGE("Лабиринт сгенерирован:\n"),
     SOLVED_MAZE_MESSAGE("Лабиринт решен:\n"),
-
     SELECT_COORDINATES("Укажите координаты начальной и конечной точки в следующем формате:  X1:Y1 X2:Y2"),
-    EXIT_COMMAND("Для завершения работы введите команду EXIT до начала генерации лабиринта");
+    EXIT_COMMAND("Для завершения работы введите команду EXIT вместо размеров лабиринта"),
+    USER_INPUT("-> ");
 
     private final String message;
 

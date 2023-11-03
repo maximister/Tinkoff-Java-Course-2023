@@ -1,7 +1,9 @@
 package edu.project2.printer;
 
+
 public class MazePrinter implements Printer {
     public static final String GREEN = "\u001B[32m";
+    public static final String RESET = "\033[0m";
 
     public MazePrinter() {
     }
@@ -9,7 +11,7 @@ public class MazePrinter implements Printer {
     @Override
     @SuppressWarnings("checkstyle:RegexpSinglelineJava")
     public void printMessage(String message) {
-        System.out.println(GREEN + "-> " + message);
+        System.out.println(GREEN + "-> " + message + RESET);
     }
 
     @Override

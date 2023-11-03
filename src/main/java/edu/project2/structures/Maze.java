@@ -70,4 +70,7 @@ public final class Maze {
         return width;
     }
 
+    public Cell[][] getGrid() {
+        return grid;
+    }
 }

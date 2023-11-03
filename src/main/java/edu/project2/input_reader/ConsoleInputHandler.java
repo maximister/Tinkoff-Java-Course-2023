@@ -4,15 +4,15 @@ import edu.project2.generator.DfsGenerator;
 import edu.project2.generator.Generator;
 import edu.project2.solver.DfsSolver;
 import edu.project2.solver.Solver;
+import edu.project2.structures.Cell;
 import edu.project2.structures.Coordinate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class ConsoleInputHandler {
-    private final static String COORDINATES_REGEX = "\\d:\\d \\d:\\d";
-    private final static String SIZES_REGEX = "\\dx\\d";
+    private final static String COORDINATES_REGEX = "\\d+:\\d+ \\d+:\\d+";
+    private final static String SIZES_REGEX = "\\d+x\\d+";
     private final static String SIZES_EXCEPTION = "Неверные Размеры лабиринта!";
     private final static String COORDINATES_EXCEPTION =
         "Неверные координаты (возможно, в этой ячейке находится стена)!";
@@ -57,7 +57,7 @@ public class ConsoleInputHandler {
         };
     }
 
-    public Coordinate[] parseCoordinates(String coordinates, int width, int height) {
+    public Coordinate[] parseCoordinates(String coordinates, int height, int width, Cell[][] grid) {
         if (coordinates == null || !Pattern.matches(COORDINATES_REGEX, coordinates)) {
             throw new IllegalArgumentException(COORDINATES_EXCEPTION);
         }
@@ -65,18 +65,25 @@ public class ConsoleInputHandler {
         List<Coordinate> splittedCoords = Arrays.stream(coordinates.split(" "))
             .map(ConsoleInputHandler::parseCoordinate).toList();
 
-        if (!splittedCoords.get(0).isValidCoordinate(width, height)
-            || !splittedCoords.get(1).isValidCoordinate(width, height)) {
+        Coordinate start = splittedCoords.get(0);
+        Coordinate end = splittedCoords.get(1);
+
+        if (
+            (!start.isValidCoordinate(width, height))
+                || (grid[start.row()][start.col()].getType() == Cell.Type.WALL)
+                || (!end.isValidCoordinate(width, height))
+                || (grid[end.row()][end.col()].getType() == Cell.Type.WALL)
+        ) {
             throw new IllegalArgumentException(COORDINATES_EXCEPTION);
         }
 
-        return splittedCoords.toArray(new Coordinate[]{});
+        return splittedCoords.toArray(new Coordinate[] {});
     }
 
     private static Coordinate parseCoordinate(String coordinate) {
         List<Integer> coords = Arrays.stream(coordinate.split(":")).map(Integer::parseInt).toList();
 
-        return new Coordinate(coords.get(0), coords.get(1));
+        return new Coordinate(coords.get(1), coords.get(0));
     }
 
 }
