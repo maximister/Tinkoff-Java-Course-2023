@@ -8,7 +8,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-public class DFSGenerator implements Generator {
+/**
+ * <pre>
+ * Генерация лабиринта методом поиска в глубину
+ * Источник: https://habr.com/ru/articles/262345/
+ * </pre>
+ */
+public class DfsGenerator implements Generator {
     private Maze maze;
     private static final int[][] MOVES_TO_NEIGHBOURS = {{0, -2}, {0, 2}, {-2, 0}, {2, 0}};
     private static final Random RANDOM = new Random();
@@ -17,7 +23,6 @@ public class DFSGenerator implements Generator {
     public Maze generate(int height, int width) {
         maze = new Maze(height, width);
 
-        //TODO: Возможно следует добавить возможность пользовательского ввода
         int startRow = 1;
         int startCol = 1;
 
@@ -68,14 +73,8 @@ public class DFSGenerator implements Generator {
         int wallRow = (firstCell.getRow() + secondCell.getRow()) / 2;
         int wallCol = (firstCell.getCol() + secondCell.getCol()) / 2;
 
-        maze.setCell(wallRow, wallCol, Cell.Type.PASSAGE);
         Cell destroyedWall = maze.getCell(wallRow, wallCol);
+        destroyedWall.setType(Cell.Type.PASSAGE);
         destroyedWall.visitThisCell();
-    }
-
-    public static void main(String[] args) {
-        DFSGenerator g = new DFSGenerator();
-        Maze myMaze = g.generate(21, 21);
-        myMaze.testPrint();
     }
 }

@@ -19,14 +19,6 @@ public final class Maze {
 
         grid = new Cell[height][width];
 
-        /*
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                grid[row][col] = new Cell(row, col, Cell.Type.WALL);
-            }
-        }
-        */
-
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 if ((row % 2 != 0 && col % 2 != 0)
@@ -43,12 +35,23 @@ public final class Maze {
         return height >= MIN_SIDE_SIZE && width >= MIN_SIDE_SIZE;
     }
 
-    public Cell getCell(int row, int col) {
-        if (!isValidCell(row, col)) {
-            throw new IllegalArgumentException("Invalid Cell coordinates!");
-        }
+    public boolean isValidCell(int row, int col) {
+        return (row > 0 && row <= height - 1) && (col > 0 && col <= width - 1);
+    }
 
+    public Cell getCell(int row, int col) {
+        if (!(row >= 0 && row < height &&  col >= 0 && col <= width)) {
+            throw new IllegalArgumentException("Invalid cell coordinates!");
+        }
         return grid[row][col];
+    }
+
+    public void resetVisitedCells() {
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                grid[row][col].resetThisCell();
+            }
+        }
     }
 
     public void setCell(int row, int col, Cell.Type type) {
@@ -59,25 +62,12 @@ public final class Maze {
         grid[row][col] = new Cell(row, col, type);
     }
 
-    public boolean isValidCell(int row, int col) {
-        return (row > 0 && row <= height - 1) && (col > 0 && col <= width - 1);
+    public int getHeight() {
+        return height;
     }
 
-    //TODO: удалить потом
-    public void testPrint() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                Cell c = grid[i][j];
-                char s;
-                if (c.getType() == Cell.Type.WALL) {
-                    s = '□';
-                } else {
-                    s = ' ';
-                }
-
-                System.out.print(s + "  ");
-            }
-            System.out.println();
-        }
+    public int getWidth() {
+        return width;
     }
+
 }

@@ -18,6 +18,10 @@ public class Cell {
         isVisited = true;
     }
 
+    public void resetThisCell() {
+        isVisited = false;
+    }
+
     public boolean isVisited() {
         return isVisited;
     }
