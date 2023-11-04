@@ -1,7 +1,9 @@
 package edu.project2;
 
 import edu.project2.generator.DfsGenerator;
+import edu.project2.generator.PrimsGenerator;
 import edu.project2.input_reader.ConsoleInputHandler;
+import edu.project2.solver.BfsSolver;
 import edu.project2.solver.DfsSolver;
 import edu.project2.structures.Cell;
 import edu.project2.structures.Coordinate;
@@ -52,8 +54,7 @@ public class InputHandlerTest {
         ConsoleInputHandler handler = new ConsoleInputHandler();
 
         assertThat(handler.selectGenerator("1") instanceof DfsGenerator).isTrue();
-        //TODO: добавить второй генератор
-        assertThat(handler.selectGenerator("2")).isEqualTo(null);
+        assertThat(handler.selectGenerator("2") instanceof PrimsGenerator).isTrue();
 
         assertThrows(IllegalArgumentException.class,
             () -> handler.selectGenerator("15"));
@@ -65,8 +66,7 @@ public class InputHandlerTest {
         ConsoleInputHandler handler = new ConsoleInputHandler();
 
         assertThat(handler.selectSolver("1") instanceof DfsSolver).isTrue();
-        //TODO: добавить второй solver
-        assertThat(handler.selectSolver("2")).isEqualTo(null);
+        assertThat(handler.selectSolver("2") instanceof  BfsSolver).isTrue();
 
         assertThrows(IllegalArgumentException.class,
             () -> handler.selectSolver("12"));

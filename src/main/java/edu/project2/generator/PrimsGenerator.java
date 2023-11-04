@@ -1,12 +1,7 @@
 package edu.project2.generator;
 
-import edu.project2.printer.MazePrinter;
-import edu.project2.printer.Printer;
-import edu.project2.renderer.ConsoleRenderer;
-import edu.project2.renderer.Renderer;
 import edu.project2.structures.Cell;
 import edu.project2.structures.Maze;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,10 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PrimsGenerator extends AbstractGenerator {
-
-    //TODO: delete
-    Renderer renderer = new ConsoleRenderer();
-    Printer printer = new MazePrinter();
 
     @Override
     public Maze generate(int height, int width) {

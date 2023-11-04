@@ -4,11 +4,12 @@ import edu.project2.structures.Cell;
 import edu.project2.structures.Coordinate;
 import edu.project2.structures.Maze;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
+import java.util.Queue;
 
-public class DfsSolver extends AbstractSolver {
+public class BfsSolver extends AbstractSolver{
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         this.maze = maze;
@@ -17,11 +18,12 @@ public class DfsSolver extends AbstractSolver {
         maze.resetVisitedCells();
 
         Map<Cell, Cell> pathMap = new HashMap<>();
-        Stack<Cell> cellStack = new Stack<>();
-        cellStack.push(startCell);
+        Queue<Cell> cellQueue = new LinkedList<>();
+        cellQueue.add(startCell);
 
-        while (!cellStack.isEmpty()) {
-            Cell currentCell = cellStack.pop();
+        while (!cellQueue.isEmpty()) {
+            Cell currentCell = cellQueue.poll();
+
             if (currentCell == endCell) {
                 break;
             }
@@ -36,7 +38,7 @@ public class DfsSolver extends AbstractSolver {
                 pathMap.put(neighbour, currentCell);
 
                 neighbour.visitThisCell();
-                cellStack.push(neighbour);
+                cellQueue.add(neighbour);
             }
         }
 
