@@ -2,10 +2,6 @@ package edu.project2.generator;
 
 import edu.project2.structures.Cell;
 import edu.project2.structures.Maze;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 import java.util.Stack;
 
 /**

@@ -40,7 +40,7 @@ public final class Maze {
     }
 
     public Cell getCell(int row, int col) {
-        if (!(row >= 0 && row < height &&  col >= 0 && col <= width)) {
+        if (!(row >= 0 && row < height && col >= 0 && col <= width)) {
             throw new IllegalArgumentException("Invalid cell coordinates!");
         }
         return grid[row][col];
@@ -68,5 +68,13 @@ public final class Maze {
 
     public Cell[][] getGrid() {
         return grid;
+    }
+
+    public void fillGrid() {
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                grid[row][col] = new Cell(row, col, Cell.Type.WALL);
+            }
+        }
     }
 }

@@ -2,8 +2,8 @@ package edu.project2;
 
 public enum ConsoleMessages {
     WELCOME_MESSAGE("Добро пожаловать в генератор Лабиринтов!"),
-    SELECT_SIZE("Введите парметры лабиринта в формате NxM, где N и M - нечетные числа больше 5:"),
-    SELECT_GENERATOR("Выберите алгоритм генерации:\n1) DFS\n2) че-то еще будет\n"),
+    SELECT_SIZE("Введите парметры лабиринта в формате NxM, где N и M - нечетные числа больше или равные 5:"),
+    SELECT_GENERATOR("Выберите алгоритм генерации:\n1) DFS\n2) Алгоритм Прима\n"),
     SELECT_SOLVER("Выберите алгоритм решения лабиринта:\n1) DFS\n2) что-то еще\n"),
     GENERATED_MAZE_MESSAGE("Лабиринт сгенерирован:\n"),
     SOLVED_MAZE_MESSAGE("Лабиринт решен:\n"),

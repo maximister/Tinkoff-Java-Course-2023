@@ -8,12 +8,11 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class AbstractGenerator implements Generator {
-    private static final Random RANDOM = new Random();
+    protected static final Random RANDOM = new Random();
     protected Maze maze;
-    private static final int[][] MOVES_TO_NEIGHBOURS = {{0, -2}, {0, 2}, {-2, 0}, {2, 0}};
+    protected static final int[][] MOVES_TO_NEIGHBOURS = {{0, -2}, {0, 2}, {-2, 0}, {2, 0}};
 
-
-    protected Cell getRandomNeighbour(int row, int col) {
+    protected List<Cell> getNeighbours(int row, int col) {
         List<Cell> neighbours = new ArrayList<>();
 
         for (int[] move : Arrays.asList(MOVES_TO_NEIGHBOURS)) {
@@ -24,6 +23,12 @@ public abstract class AbstractGenerator implements Generator {
                 neighbours.add(neighbour);
             }
         }
+
+        return neighbours;
+    }
+
+    protected Cell getRandomNeighbour(int row, int col) {
+        List<Cell> neighbours = getNeighbours(row, col);
 
         if (!neighbours.isEmpty()) {
             return neighbours.get(RANDOM.nextInt(neighbours.size()));
@@ -39,6 +44,11 @@ public abstract class AbstractGenerator implements Generator {
         Cell destroyedWall = maze.getCell(wallRow, wallCol);
         destroyedWall.setType(Cell.Type.PASSAGE);
         destroyedWall.visitThisCell();
+    }
+
+    protected void destroyWall(Cell wall) {
+        wall.setType(Cell.Type.PASSAGE);
+        wall.visitThisCell();
     }
 
     public static Random getRandomForTests() {

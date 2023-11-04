@@ -2,6 +2,7 @@ package edu.project2.input_reader;
 
 import edu.project2.generator.DfsGenerator;
 import edu.project2.generator.Generator;
+import edu.project2.generator.PrimsGenerator;
 import edu.project2.solver.DfsSolver;
 import edu.project2.solver.Solver;
 import edu.project2.structures.Cell;
@@ -42,8 +43,7 @@ public class ConsoleInputHandler {
     public Generator selectGenerator(String generator) {
         return switch (Integer.parseInt(generator)) {
             case 1 -> new DfsGenerator();
-            //TODO: добавить
-            case 2 -> null;
+            case 2 -> new PrimsGenerator();
             default -> throw new IllegalArgumentException(INVALID_SELECTION_EXCEPTION);
         };
     }

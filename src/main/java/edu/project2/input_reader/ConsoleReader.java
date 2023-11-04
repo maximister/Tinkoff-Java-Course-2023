@@ -15,6 +15,6 @@ public class ConsoleReader implements InputReader {
     public String getInput() {
         userInputPointer();
         buffer = scanner.nextLine();
-        return buffer;
+        return buffer.trim();
     }
 }
