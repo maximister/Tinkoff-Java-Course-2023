@@ -32,7 +32,7 @@ public final class Maze {
     }
 
     private boolean isValidParameters(int height, int width) {
-        return height >= MIN_SIDE_SIZE && width >= MIN_SIDE_SIZE;
+        return height >= MIN_SIDE_SIZE && width >= MIN_SIDE_SIZE && height % 2 != 0 && width % 2 != 0;
     }
 
     public boolean isValidCell(int row, int col) {
@@ -55,10 +55,6 @@ public final class Maze {
     }
 
     public void setCell(int row, int col, Cell.Type type) {
-        if (!isValidCell(row, col)) {
-            throw new IllegalArgumentException("Invalid Cell coordinates!");
-        }
-
         grid[row][col] = new Cell(row, col, type);
     }
 

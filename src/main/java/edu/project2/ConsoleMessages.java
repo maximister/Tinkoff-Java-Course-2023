@@ -9,7 +9,8 @@ public enum ConsoleMessages {
     SOLVED_MAZE_MESSAGE("Лабиринт решен:\n"),
     SELECT_COORDINATES("Укажите координаты начальной и конечной точки в следующем формате:  X1:Y1 X2:Y2"),
     EXIT_COMMAND("Для завершения работы введите команду EXIT вместо размеров лабиринта"),
-    USER_INPUT("-> ");
+    USER_INPUT("-> "),
+    END_MESSAGE("Работа завершена");
 
     private final String message;
 

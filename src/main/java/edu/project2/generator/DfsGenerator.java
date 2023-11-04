@@ -77,4 +77,8 @@ public class DfsGenerator implements Generator {
         destroyedWall.setType(Cell.Type.PASSAGE);
         destroyedWall.visitThisCell();
     }
+
+    public static Random getRandomForTests() {
+        return RANDOM;
+    }
 }

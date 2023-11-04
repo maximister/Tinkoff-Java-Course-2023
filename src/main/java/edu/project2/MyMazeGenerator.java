@@ -12,6 +12,7 @@ import edu.project2.solver.Solver;
 import edu.project2.structures.Coordinate;
 import edu.project2.structures.Maze;
 import java.util.List;
+import static edu.project2.generator.DfsGenerator.getRandomForTests;
 
 public class MyMazeGenerator {
     private Generator mazeGenerator;
@@ -28,10 +29,9 @@ public class MyMazeGenerator {
         reader = new ConsoleReader();
         inputHandler = new ConsoleInputHandler();
         mazeRenderer = new ConsoleRenderer();
-        run();
     }
 
-    private void run() {
+    public void run() {
         printer.printMessage(ConsoleMessages.WELCOME_MESSAGE.getMessage());
         String command;
         Integer[] sizes;
@@ -43,6 +43,7 @@ public class MyMazeGenerator {
             command = reader.getInput();
 
             if (inputHandler.isExit(command)) {
+                printer.printMessage(ConsoleMessages.END_MESSAGE.getMessage());
                 break;
             }
 
@@ -56,8 +57,7 @@ public class MyMazeGenerator {
 
             //printing generated maze
             printer.printMessage(ConsoleMessages.GENERATED_MAZE_MESSAGE.getMessage());
-            String deletThisHueta = mazeRenderer.render(maze);
-            printer.printMaze(deletThisHueta);
+            printer.printMaze(mazeRenderer.render(maze));
 
             //getting start and end Cells
             printer.printMessage(ConsoleMessages.SELECT_COORDINATES.getMessage());
@@ -76,7 +76,13 @@ public class MyMazeGenerator {
         }
     }
 
+    public void runForTest() {
+       getRandomForTests().setSeed(2);
+       run();
+    }
+
     public static void main(String[] args) {
         MyMazeGenerator myMaze = new MyMazeGenerator();
+        myMaze.run();
     }
 }
