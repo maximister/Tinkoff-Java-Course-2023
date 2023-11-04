@@ -8,7 +8,6 @@ import java.util.List;
 
 public class ConsoleRenderer implements Renderer {
 
-    //TODO: использовать \t
     public static final String RED = "\033[0;31m";
     public static final String WHITE = "\u001B[37m";
     public static final String RESET = "\033[0m";
