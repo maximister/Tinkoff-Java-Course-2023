@@ -1,6 +1,6 @@
 package edu.project2;
 
-import edu.project2.generator.DfsGenerator;
+import edu.project2.generator.PrimsGenerator;
 import edu.project2.solver.BfsSolver;
 import edu.project2.solver.Solver;
 import edu.project2.structures.Coordinate;
@@ -9,12 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-
-public class DfsGeneratorTest {
+public class PrimsGeneratorTest {
     @Test
-    @DisplayName("testing that DFS algorithm maze has solution")
+    @DisplayName("Testing that Prims algorithm has solution")
     public void dfsGeneratorTest() {
-        DfsGenerator generator = new DfsGenerator();
+        PrimsGenerator generator = new PrimsGenerator();
         Solver solver = new BfsSolver();
         Coordinate start = new Coordinate(1, 1);
         Coordinate end = new Coordinate(9, 9);

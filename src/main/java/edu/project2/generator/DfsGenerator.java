@@ -4,12 +4,6 @@ import edu.project2.structures.Cell;
 import edu.project2.structures.Maze;
 import java.util.Stack;
 
-/**
- * <pre>
- * Генерация лабиринта методом поиска в глубину
- * Источник: https://habr.com/ru/articles/262345/
- * </pre>
- */
 public class DfsGenerator extends AbstractGenerator {
     @Override
     public Maze generate(int height, int width) {

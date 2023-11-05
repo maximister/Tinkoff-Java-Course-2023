@@ -39,10 +39,6 @@ public class RendererTest {
 
         String renderedMaze = renderer.render(testMaze, path);
 
-        String WHITE = "\u001B[37m";
-        String RED = "\033[0;31m";
-        String RESET = "\033[0m";
-
         String expected = getRenderedTestMAzeWithPath();
 
         assertThat(renderedMaze).isEqualTo(expected);
