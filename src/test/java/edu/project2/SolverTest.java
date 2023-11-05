@@ -1,8 +1,6 @@
 package edu.project2;
 
 import edu.project2.generator.DfsGenerator;
-import edu.project2.renderer.ConsoleRenderer;
-import edu.project2.renderer.Renderer;
 import edu.project2.solver.BfsSolver;
 import edu.project2.solver.DfsSolver;
 import edu.project2.solver.Solver;

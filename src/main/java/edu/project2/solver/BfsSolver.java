@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-public class BfsSolver extends AbstractSolver{
+public class BfsSolver extends AbstractSolver {
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         this.maze = maze;
@@ -33,8 +33,7 @@ public class BfsSolver extends AbstractSolver{
                 continue;
             }
 
-            for (int i = 0; i < neighbours.size(); i++) {
-                Cell neighbour = neighbours.get(i);
+            for (Cell neighbour : neighbours) {
                 pathMap.put(neighbour, currentCell);
 
                 neighbour.visitThisCell();
