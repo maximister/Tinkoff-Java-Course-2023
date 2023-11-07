@@ -1,6 +1,6 @@
 package edu.hw3.task1;
 
- final class Encoder {
+final class Encoder {
     private Encoder() {
     }
 
@@ -9,12 +9,24 @@ package edu.hw3.task1;
             throw new NullPointerException("your string must not be null!");
         }
 
-        char[] encodedString = new char[input.length()];
-        int i = 0;
+        /*
+        Если вдруг проблема не в кириллице....
+        (осуждаю, я мирный добрый хороший)
+        if (input.toUpperCase().contains("JEW")) {
+            throw new IllegalArgumentException();
+        }
+        */
+
+        StringBuilder encodedString = new StringBuilder();
 
         for (char symbol : input.toCharArray()) {
             char encodedLetter;
             if (Character.isLetter(symbol)) {
+
+                if (!isLatinLetter(symbol)) {
+                    throw new IllegalArgumentException("Please use only latin letters");
+                }
+
                 if (Character.isLowerCase(symbol)) {
                     encodedLetter = (char) ('z' - (symbol - 'a'));
                 } else {
@@ -24,9 +36,13 @@ package edu.hw3.task1;
                 encodedLetter = symbol;
             }
 
-            encodedString[i++] = encodedLetter;
+            encodedString.append(encodedLetter);
         }
 
-        return new String(encodedString);
+        return encodedString.toString();
+    }
+
+    private static boolean isLatinLetter(char c) {
+        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
     }
 }
