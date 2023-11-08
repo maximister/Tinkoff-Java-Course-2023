@@ -10,7 +10,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-
 //solutions for tasks 1 - 18
 public class Solution {
     private static final String INVALID_ARGUMENT_MESSAGE = "Invalid value of K";
@@ -22,7 +21,9 @@ public class Solution {
 
     //task1
     public static List<Animal> sortAnimalsByHeight(List<Animal> animals) {
-        return animals.stream().sorted(Comparator.comparingInt(Animal::height)).toList();
+        return animals.stream()
+            .sorted(Comparator.comparingInt(Animal::height))
+            .toList();
     }
 
     //task2
@@ -40,7 +41,10 @@ public class Solution {
 
     //task4
     public static Animal getLongestNameAnimal(List<Animal> animals) {
-        return animals.stream().max(Comparator.comparingInt(a -> a.name().length())).get();
+        return animals.stream()
+                .max(Comparator.comparingInt(a -> a.name()
+                .length()))
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     //task5
@@ -116,7 +120,7 @@ public class Solution {
         if (k <= 0) {
             throw new IllegalArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
-        return animals.stream().anyMatch((a) -> (a.height() > k));
+        return animals.stream().anyMatch(a -> (a.type() == Animal.Type.DOG && a.height() > k));
     }
 
     //task15
@@ -132,7 +136,9 @@ public class Solution {
             throw new IllegalArgumentException(INVALID_ARGUMENTS_MESSAGE);
         }
 
-        return animals.stream().filter((a) -> (a.age() >= k && a.age() <= l)).mapToInt(Animal::weight).sum();
+        return animals.stream()
+            .filter((a) -> (a.age() >= k && a.age() <= l))
+            .mapToInt(Animal::weight).sum();
     }
 
     //task15v2
@@ -145,7 +151,8 @@ public class Solution {
             throw new IllegalArgumentException(INVALID_ARGUMENTS_MESSAGE);
         }
 
-        return animals.stream().filter((a) -> (a.age() >= k && a.age() <= l))
+        return animals.stream()
+            .filter((a) -> (a.age() >= k && a.age() <= l))
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
     }
 
@@ -169,7 +176,7 @@ public class Solution {
         long dogsBitesAmount = animals.stream()
             .filter((a) -> (a.type() == Animal.Type.DOG && a.bites())).count();
 
-        return spidersBitesAmount >= dogsBitesAmount;
+        return spidersBitesAmount > dogsBitesAmount;
     }
 
     //task18

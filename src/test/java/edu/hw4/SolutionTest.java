@@ -231,8 +231,8 @@ public class SolutionTest {
     @DisplayName("task 14 test")
     public void hasDogHigherThanKInListTest() {
         List<Animal> testList = (generateAnimalList());
-        Boolean result1 = hasDogHigherThanKInList(testList, 150);
-        Boolean result2 = hasDogHigherThanKInList(testList, 250);
+        Boolean result1 = hasDogHigherThanKInList(testList, 50);
+        Boolean result2 = hasDogHigherThanKInList(testList, 120);
 
         assertThat(result1).isTrue();
         assertThat(result2).isFalse();
