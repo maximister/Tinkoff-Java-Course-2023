@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
-import static edu.hw1.task3.NestableArraysChecker.isNestable;
 import static edu.hw5.task1.ComputerClubAnalyzer.getAverageDurationOfSession;
 import static edu.hw5.task1.ComputerClubAnalyzer.getAverageSessionDurationForPrint;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
