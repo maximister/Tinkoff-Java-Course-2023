@@ -8,7 +8,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Friday13Seeker {
+public final class Friday13Seeker {
 
     private final static int FRIDAY13 = 13;
     private final static String ILLEGAL_YEAR_MESSAGE = "I'm sorry, but we don't work with the times of your youth(";
