@@ -23,7 +23,7 @@ public final class PasswordValidator {
     }
 
     public static boolean isValidPasswordVersion2(String password) {
-        Pattern passwordPattern = Pattern.compile("^\\w*[~!@#$%^&*|]{1}+\\w*$");
+        Pattern passwordPattern = Pattern.compile("^\\w*[~!@#$%^&*|]{1}\\w*$");
         Matcher matcher = passwordPattern.matcher(password);
         return matcher.matches();
     }
