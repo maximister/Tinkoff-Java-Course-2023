@@ -49,6 +49,7 @@ public class Friday13SeekerTest {
         assertThat(getNextFriday13(testDate)).isEqualTo(expectedDate);
     }
 
+    //Это лишнее наверное, да?
     @Test
     @DisplayName("getNextFriday13 test with null")
     public void getNextFriday13Test() {
