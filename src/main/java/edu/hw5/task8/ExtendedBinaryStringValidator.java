@@ -1,7 +1,5 @@
 package edu.hw5.task8;
 
-import java.util.regex.Pattern;
-
 public final class ExtendedBinaryStringValidator {
     private ExtendedBinaryStringValidator() {
     }
@@ -15,7 +13,7 @@ public final class ExtendedBinaryStringValidator {
 
     //начинается с 0 и имеет нечетную длину, или начинается с 1 и имеет четную длину
     public static boolean isZeroAndOddLenOrOneAndEvenLen(String binaryString) {
-        return binaryString.matches("^0([01]{2})* || 1[01]([01]{2})*$");
+        return binaryString.matches("^0([01]{2})*|1[01]([01]{2})*$");
     }
 
     //количество 0 кратно 3
@@ -42,5 +40,7 @@ public final class ExtendedBinaryStringValidator {
     }
 
     //нет последовательных 1
-
+    public static boolean isNoSequentialOnes(String binaryString) {
+        return binaryString.matches("^(?![01]*11)[01]*$");
+    }
 }

@@ -3,7 +3,6 @@ package edu.hw5.task7;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import static edu.hw5.task6.SubstringChecker.isSubstring;
 import static edu.hw5.task7.BinaryStringValidator.doesContainsAtLeastThreeSymbolsAndThirdIsZero;
 import static edu.hw5.task7.BinaryStringValidator.isFirstSymbolEqualsToLast;
 import static edu.hw5.task7.BinaryStringValidator.isLengthMoreThanOneAndLessThanThree;
