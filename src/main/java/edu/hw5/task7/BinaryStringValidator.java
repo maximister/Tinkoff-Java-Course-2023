@@ -3,7 +3,7 @@ package edu.hw5.task7;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BinaryStringValidator {
+public final class BinaryStringValidator {
 
     private final static Pattern PATTERN1 = Pattern.compile("^[01]{2}0[01]*$");
     private final static Pattern PATTERN2 = Pattern.compile("^1[10]*1|0[10]*0|[01]$");
