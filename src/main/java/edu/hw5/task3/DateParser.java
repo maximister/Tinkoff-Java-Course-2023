@@ -30,7 +30,7 @@ public class DateParser {
     }
 
     private void makeChain() {
-        //
+        //пробовал сделать стримами, но не очень то вышло. Если есть идеи, буду рад подсказкам)
         for (int i = 0; i < dateParsers.size() - 1; i++) {
             dateParsers.get(i).setNextParser(dateParsers.get(i + 1));
         }
