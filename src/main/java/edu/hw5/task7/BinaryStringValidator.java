@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 public final class BinaryStringValidator {
 
     private final static Pattern PATTERN1 = Pattern.compile("^[01]{2}0[01]*$");
-    private final static Pattern PATTERN2 = Pattern.compile("^1[10]*1|0[10]*0|[01]$");
+    //private final static Pattern PATTERN2 = Pattern.compile("^1[10]*1|0[10]*0|[01]$");
+    //нежная регулярка
+    private final static Pattern PATTERN2 = Pattern.compile("^([01])[01]*\\1|[01]$");
     private final static Pattern PATTERN3 = Pattern.compile("^[10]{1,3}$");
 
     private BinaryStringValidator() {

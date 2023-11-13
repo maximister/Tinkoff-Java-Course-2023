@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ComputerClubAnalyzer {
+public final class ComputerClubAnalyzer {
 
     //2022-03-12, 23:50
+    private final static int SECONDS_IN_MINUTES = 60;
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
     private final static Pattern PATTERN =
         Pattern.compile("^(\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2}) - (\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2})$");
@@ -20,12 +21,11 @@ public class ComputerClubAnalyzer {
     }
 
     //для вывода
-    @SuppressWarnings("checkstyle:MagicNumber")
     public static String getAverageSessionDurationForPrint(List<String> sessions) {
-        Long averageDurationInMinutes = getAverageDurationOfSession(sessions).toMinutes();
+        long averageDurationInMinutes = getAverageDurationOfSession(sessions).toMinutes();
 
         return String.format("average duration is: %sh %sm",
-            averageDurationInMinutes / 60, averageDurationInMinutes % 60);
+            averageDurationInMinutes / SECONDS_IN_MINUTES, averageDurationInMinutes % SECONDS_IN_MINUTES);
     }
 
     public static Duration getAverageDurationOfSession(List<String> sessions) {
