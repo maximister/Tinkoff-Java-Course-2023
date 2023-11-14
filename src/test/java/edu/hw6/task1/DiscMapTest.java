@@ -2,9 +2,6 @@ package edu.hw6.task1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,11 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import static edu.hw1.task3.NestableArraysChecker.isNestable;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.in;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DiscMapTest {
@@ -72,6 +65,8 @@ public class DiscMapTest {
         //content of a new map is equal to other map with the same file (coping map by files)
         assertThat(discMap.entrySet().toString()).isEqualTo(discMap2.entrySet().toString());
 
+
+        //в тестах какой-то колхоз с удалением файлов, тк иначе все ломается
         File file = new File(testFile);
         file.delete();
     }
