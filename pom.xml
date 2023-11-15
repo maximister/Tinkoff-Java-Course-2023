@@ -18,7 +18,6 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -44,6 +43,7 @@
         <maven-site-plugin.version>4.0.0-M9</maven-site-plugin.version>
 
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+        <powermock.version>2.0.2</powermock.version>
     </properties>
 
     <dependencyManagement>
@@ -128,7 +128,23 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-core</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>2.0.9</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
