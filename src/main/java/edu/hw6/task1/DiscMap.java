@@ -1,6 +1,10 @@
 package edu.hw6.task1;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -101,7 +105,7 @@ public class DiscMap extends HashMap<String, String> implements Map<String, Stri
         }
     }
 
-    private String putForLoading(String key, String value) {
-        return super.put(key, value);
+    private void putForLoading(String key, String value) {
+        super.put(key, value);
     }
 }
