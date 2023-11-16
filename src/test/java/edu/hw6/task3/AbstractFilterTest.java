@@ -29,7 +29,6 @@ public class AbstractFilterTest {
 
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(pathFile, filter)) {
             entries.forEach(path -> paths.add(path.toString()));
-            System.out.println(paths);
             assertThat(paths.size() == 1
                 && FilenameUtils.getName(paths.get(0)).equals("art-as.png")).isTrue();
         } catch (IOException e) {
