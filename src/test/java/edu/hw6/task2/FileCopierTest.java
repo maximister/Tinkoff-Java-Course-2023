@@ -19,8 +19,7 @@ public class FileCopierTest {
     @ParameterizedTest
     @MethodSource("getFileName")
     @DisplayName("cloneFile test")
-    public void cloneFileTest(String file) {
-        Path filePath = Paths.get(file);
+    public void cloneFileTest(Path filePath) {
         makeFile(filePath);
         Path copyPath = cloneFile(filePath);
 
@@ -44,8 +43,7 @@ public class FileCopierTest {
     @ParameterizedTest
     @MethodSource("getFileName")
     @DisplayName("coping no existing file")
-    public void noExistingFileCopyTest(String file) {
-        Path filePath = Paths.get(file);
+    public void noExistingFileCopyTest(Path filePath) {
 
         assertThrows(
             FileSystemNotFoundException.class,
@@ -56,10 +54,10 @@ public class FileCopierTest {
     }
 
     private static Stream<Arguments> getFileName() {
-        String fileName =
-            "C://Users//maxim//OneDrive//Рабочий стол//Tinkoff-Java-Course-2023//src/main//java//edu//hw6//task2//test.txt";
+        String currentAbsolutePathString = Paths.get("").toAbsolutePath().toString();
+        Path path = Paths.get(currentAbsolutePathString, "test.txt");
         return Stream.of(
-            Arguments.of(fileName)
+            Arguments.of(path)
         );
     }
 
