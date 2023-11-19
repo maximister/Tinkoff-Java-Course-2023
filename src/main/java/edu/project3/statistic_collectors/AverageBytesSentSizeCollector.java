@@ -7,9 +7,6 @@ import java.math.BigInteger;
 import java.util.List;
 
 public class AverageBytesSentSizeCollector extends StatisticsCollector {
-    //TODO: количество логов по идее оптимальнее не считать тут, а взять в конце как размер листа логов
-    // но при замене листа на потоки хз что выйдет надо думатб
-    // поробовать разработать какую-то формулу
     private long amount;
     //не уверен, что это норм вариант, но пока так
     private BigInteger allBytesSent;
@@ -46,7 +43,6 @@ public class AverageBytesSentSizeCollector extends StatisticsCollector {
         return List.of(requestAmount, avgBytesSent);
     }
 
-    //TODO:наверное удалить
     private long getAverageBytesSentSize() {
         return allBytesSent.divide(BigInteger.valueOf(amount)).longValueExact();
     }

@@ -7,19 +7,17 @@ import edu.project3.logs.NginxLogParser;
 import edu.project3.logs.log_structure.NginxLogRecord;
 import edu.project3.metrics.MetricsAndCollectorsHandler;
 import edu.project3.metrics.MetricsContainer;
-import edu.project3.renderers.MarkdownRenderer;
+import edu.project3.printer.TablePrinter;
 import edu.project3.renderers.TableRenderer;
 import java.util.List;
 import static edu.project3.log_sources.LogSourceFactory.getLogsSource;
+import static edu.project3.renderers.RendererFactory.getRenderer;
 
 public class LogAnalyzer {
 
-    //input example
-    //String input = "java -jar nginx-log-stats.jar --path logs/2023* --from 2023-08-31 --format markdown";
-    //добавить парсер аргументов
     private ArgumentsParser argumentsParser;
-//    private TablePrinter printer;
-//    private Renderer renderer;
+    private TablePrinter printer;
+    private TableRenderer renderer;
     private ParsedInput settings;
     private MetricsAndCollectorsHandler handler;
     private NginxLogParser logParser;
@@ -34,17 +32,14 @@ public class LogAnalyzer {
 
     private void build() {
         settings = argumentsParser.getParsedInput();
-        //Log Source Factory задает Log Suorce согласно агрументам парсера
         source = getLogsSource(settings.path());
-        //создание хэндлера
-        //передача времени в хэндлер
-        handler = new MetricsAndCollectorsHandler(settings.from(), settings.to());
-        //Создание цепи фильтров
+
+        handler = new MetricsAndCollectorsHandler(settings.from(), settings.to(), source.getSources());
         handler.buildChainOfCollectors();
-        //создание парсера
         logParser = new NginxLogParser();
-        //создание принтера
-        //Выбор рендерера (типа таблиц) согласно аргументам из парсера (создать Renderer Factory)
+
+        printer = new TablePrinter();
+        renderer = getRenderer(settings.format());
     }
 
     private void run() {
@@ -55,16 +50,17 @@ public class LogAnalyzer {
         parsedLogs.forEach(log -> handler.processLog(log));
         //рендер
         //вывод таблиц через принтер
-
         List<MetricsContainer> tables = handler.getTables();
-        TableRenderer renderer = new MarkdownRenderer();
-        System.out.println(renderer.getRenderedTable(tables.get(0), tables.get(0).getCols()));
-        //tables.forEach(System.out::println);
+        tables.forEach(table -> printer.printTable(
+            renderer.getRenderedTable(table, table.getCols())
+        ));
     }
 
+    @SuppressWarnings("checkstyle:UncommentedMain")
     public static void main(String[] args) {
         //java -jar nginx-log-stats.jar --path logs/2023* --from 2023-08-31 --format markdown
-        String input = "java -jar nginx-log-stats.jar --path *  --format markdown";
+        //String input = "java -jar nginx-log-stats.jar --path *  --format markdown";
+        String input = "java -jar nginx-log-stats.jar --path *  --format adoc";
         LogAnalyzer analyzer = new LogAnalyzer(input);
     }
 

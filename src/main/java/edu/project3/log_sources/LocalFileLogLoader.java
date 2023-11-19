@@ -13,6 +13,7 @@ import java.util.List;
 
 public class LocalFileLogLoader implements LogsSource {
     private final List<Path> files;
+    private String source;
     private final static String NO_VALID_FILES
         = "there are no log files in your directory. Please try again";
 
@@ -23,6 +24,7 @@ public class LocalFileLogLoader implements LogsSource {
     private  List<Path> parseFilePaths(String stringPath) {
         List<Path> matchedFiles = new ArrayList<>();
         Path dir = Path.of("src", "main", "java", "edu", "project3", "resources");
+        source = dir + stringPath;
         PathMatcher pathMatcher = FileSystems.getDefault()
             .getPathMatcher("glob:" + "**/" + stringPath + "*");
         try {
@@ -57,5 +59,10 @@ public class LocalFileLogLoader implements LogsSource {
         });
 
         return logsList;
+    }
+
+    @Override
+    public String getSources() {
+        return source;
     }
 }

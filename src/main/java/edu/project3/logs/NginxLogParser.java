@@ -11,9 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-//TODO: протестировать и закончить класс
-// добавить время, рекорды для хрнения семевых штук и тд, паттерны для них
-// сделать статические методы
 public class NginxLogParser {
     /*$remote_addr – IP с которого был сделан запрос
     $remote_user – Пользователь, аутентифицированный через HTTP аутентификацию, обычно пустое
@@ -34,7 +31,6 @@ public class NginxLogParser {
     public NginxLogParser() {
     }
 
-    //TODO: мб передлать под стримы
     public List<NginxLogRecord> parseLogs(List<String> logs) {
 
         return logs.stream().map(this::parseLog).toList();

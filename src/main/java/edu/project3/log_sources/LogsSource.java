@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface LogsSource {
     List<String> getLogs();
+
+    String getSources();
 }

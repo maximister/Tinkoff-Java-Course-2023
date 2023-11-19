@@ -32,13 +32,4 @@ public abstract class MetricsContainer {
     public List<MetricsRow> getTableRows() {
         return table;
     }
-
-    @Override public String toString() {
-        return "MetricsContainer{" +
-            "header='" + header + '\'' +
-            ", table=" + table +
-            '}';
-    }
-
-    //TODO: методы для отрисовки таблицы, получения таблицы, определения длины колонки в символах и тд
 }

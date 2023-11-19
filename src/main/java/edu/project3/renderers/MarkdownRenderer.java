@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MarkdownRenderer extends AbstractRenderer {
 
-    private final static String WALL = " | ";
+    private final static String WALL = "|";
 
     public MarkdownRenderer() {
     }

@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetricsAndCollectorsHandler {
-    //TODO: проверить, что временной фильтр первый
     private List<MetricsContainer> tables;
     private List<StatisticsCollector> collectors;
     private boolean wasBuild;
+    private String sources;
 
-    public MetricsAndCollectorsHandler(OffsetDateTime from, OffsetDateTime to) {
+    public MetricsAndCollectorsHandler(OffsetDateTime from, OffsetDateTime to, String sources) {
         tables = List.of(
-            new CommonInformationMetrics(from, to),
+            new CommonInformationMetrics(from, to, sources),
             new RequestedResourcesMetrics(),
             new ResponseStatusMetrics()
         );
 
+        this.sources = sources;
         wasBuild = false;
     }
 

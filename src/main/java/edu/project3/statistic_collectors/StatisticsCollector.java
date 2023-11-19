@@ -19,7 +19,7 @@ public abstract class StatisticsCollector {
     protected static final Logger LOGGER = LogManager.getLogger();
 
     public void setNextCollector(StatisticsCollector nextCollector) {
-        LOGGER.info(nextCollector.getCollectorsName() + " добавлен в цепь");
+        LOGGER.info(nextCollector.getCollectorsName() + " was add to the chain");
         this.nextCollector = nextCollector;
     }
 

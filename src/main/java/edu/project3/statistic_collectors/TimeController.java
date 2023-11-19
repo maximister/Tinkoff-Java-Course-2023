@@ -32,8 +32,8 @@ public class TimeController extends StatisticsCollector {
             throw new IllegalStateException(ROW_SIZE_ERROR);
         }
 
-        String startDate = from.isEqual(OffsetDateTime.MIN) ? from.toLocalDate().toString() : NO_DATE_SYMBOL;
-        String endDate = to.isEqual(OffsetDateTime.MAX) ? to.toLocalDate().toString() : NO_DATE_SYMBOL;
+        String startDate = from.isAfter(OffsetDateTime.MIN) ? from.toLocalDate().toString() : NO_DATE_SYMBOL;
+        String endDate = to.isBefore(OffsetDateTime.MAX) ? to.toLocalDate().toString() : NO_DATE_SYMBOL;
 
         return List.of(
             MetricsRow.builder()

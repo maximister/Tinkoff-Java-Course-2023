@@ -6,33 +6,17 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UrlLogLoader implements LogsSource {
     private String logs;
-
-//    private final static String INVALID_URL_MESSAGE
-//        = "Error! Your URL has invalid format. Please try again";
+    private String source;
 
     public UrlLogLoader(String url) {
-        //TODO: удалить, тк проверка теперь в другом классе
-//        Pattern urlPattern = Pattern.compile(URL_PATTERN);
-//        Matcher matcher = urlPattern.matcher(url);
-//        if (!matcher.matches()) {
-//            throw new IllegalArgumentException(INVALID_URL_MESSAGE);
-//        }
-
+        source = url;
         sendRequest(url);
     }
 
     public List<String> parseRequest() {
-        //TODO: вполне возможно, это тут не нужно
-        if (logs == null || logs.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-
-        //TODO: просить проверяющего про необходимость файлов
         return List.of(logs.split("\n"));
     }
 
@@ -46,7 +30,6 @@ public class UrlLogLoader implements LogsSource {
 
             logs = response.body();
         } catch (IOException | InterruptedException e) {
-            //TODO: подумать, как представить ошибку получше
             throw new RuntimeException(e);
         }
     }
@@ -54,5 +37,10 @@ public class UrlLogLoader implements LogsSource {
     @Override
     public List<String> getLogs() {
         return parseRequest();
+    }
+
+    @Override
+    public String getSources() {
+        return source;
     }
 }
