@@ -1,6 +1,9 @@
 package edu.project3.input_arguments_parser;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -43,10 +46,12 @@ public class ArgumentsParser {
                     path = value;
                     break;
                 case "from":
-                    from = OffsetDateTime.parse(value, DATE_TIME_FORMATTER);
+                    from = OffsetDateTime.of(LocalDate.parse(value, DATE_TIME_FORMATTER),
+                        LocalTime.MIN, ZoneOffset.UTC);
                     break;
                 case "to":
-                    to = OffsetDateTime.parse(value, DATE_TIME_FORMATTER);
+                    to = OffsetDateTime.of(LocalDate.parse(value, DATE_TIME_FORMATTER),
+                        LocalTime.MIN, ZoneOffset.UTC);
                     break;
                 case "format":
                     format = value;

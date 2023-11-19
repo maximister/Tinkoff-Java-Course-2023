@@ -18,7 +18,7 @@ public final class LogSourceFactory {
         if (matcher.matches()) {
             return new UrlLogLoader(source);
         } else {
-            return new LocalFileLogLoader(Path.of(source));
+            return new LocalFileLogLoader(source);
         }
     }
 }

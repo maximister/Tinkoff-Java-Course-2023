@@ -1,45 +1,44 @@
 package edu.project3.log_sources;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.PathMatcher;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-import org.apache.commons.io.FilenameUtils;
 
-//TODO: добавить обработку глоб строк
-// возможно переделать под работу со строками а не path
 public class LocalFileLogLoader implements LogsSource {
     private final List<Path> files;
     private final static String NO_VALID_FILES
-        = "there are no log files in your directory/ Please try again";
+        = "there are no log files in your directory. Please try again";
 
-    public LocalFileLogLoader(Path directoryPath) {
-        if (Files.isDirectory(directoryPath)) {
-            files = getFilesFromDirectory(directoryPath);
-        } else {
-            if (isValidPath(directoryPath)) {
-                files = List.of(directoryPath);
-            } else {
-                throw new IllegalArgumentException(NO_VALID_FILES);
-            }
-        }
+    public LocalFileLogLoader(String directoryPath) {
+        files = parseFilePaths(directoryPath);
     }
 
-    private boolean isValidPath(Path path) {
-        return Files.exists(path) && "txt".equals(FilenameUtils.getExtension(path.toString()));
-    }
-
-    private List<Path> getFilesFromDirectory(Path directoryPath) {
-        try (Stream<Path> paths = Files.walk(directoryPath)) {
-            return paths
-                .filter(Files::isRegularFile)
-                .filter(this::isValidPath)
-                .toList();
+    private  List<Path> parseFilePaths(String stringPath) {
+        List<Path> matchedFiles = new ArrayList<>();
+        Path dir = Path.of("src", "main", "java", "edu", "project3", "resources");
+        PathMatcher pathMatcher = FileSystems.getDefault()
+            .getPathMatcher("glob:" + "**/" + stringPath + "*");
+        try {
+            Files.walkFileTree(dir, new SimpleFileVisitor<>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                    if (pathMatcher.matches(file)) {
+                        matchedFiles.add(file);
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+            });
         } catch (IOException e) {
-            throw new IllegalArgumentException(NO_VALID_FILES);
+            throw new RuntimeException(NO_VALID_FILES);
         }
+        return matchedFiles;
     }
 
     private List<String> getLogsFromFile(Path path) {
