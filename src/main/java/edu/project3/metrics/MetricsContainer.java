@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-//что-то вроде хранилица для будущей таблицы
+//что-то вроде хранилища для будущей таблицы
 @Getter
 public abstract class MetricsContainer {
     //название таблицы

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.apache.commons.io.FilenameUtils;
 
+//TODO: добавить обработку глоб строк
+// возможно переделать под работу со строками а не path
 public class LocalFileLogLoader implements LogsSource {
     private final List<Path> files;
     private final static String NO_VALID_FILES
