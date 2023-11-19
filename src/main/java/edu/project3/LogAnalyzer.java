@@ -20,7 +20,7 @@ public class LogAnalyzer {
     }
 
     private void build() {
-        //Log Factory задает Log Suorce согласно агрументам парсера
+        //Log Source Factory задает Log Suorce согласно агрументам парсера
         //создание хэндлера
         //передача времени в хэндлер
         //Создание цепи фильтров
