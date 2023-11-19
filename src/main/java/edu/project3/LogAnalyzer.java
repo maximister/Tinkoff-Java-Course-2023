@@ -7,6 +7,8 @@ import edu.project3.logs.NginxLogParser;
 import edu.project3.logs.log_structure.NginxLogRecord;
 import edu.project3.metrics.MetricsAndCollectorsHandler;
 import edu.project3.metrics.MetricsContainer;
+import edu.project3.renderers.MarkdownRenderer;
+import edu.project3.renderers.TableRenderer;
 import java.util.List;
 import static edu.project3.log_sources.LogSourceFactory.getLogsSource;
 
@@ -55,7 +57,9 @@ public class LogAnalyzer {
         //вывод таблиц через принтер
 
         List<MetricsContainer> tables = handler.getTables();
-        tables.forEach(System.out::println);
+        TableRenderer renderer = new MarkdownRenderer();
+        System.out.println(renderer.getRenderedTable(tables.get(0), tables.get(0).getCols()));
+        //tables.forEach(System.out::println);
     }
 
     public static void main(String[] args) {

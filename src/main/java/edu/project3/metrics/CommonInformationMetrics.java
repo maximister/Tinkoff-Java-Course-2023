@@ -17,7 +17,7 @@ public class CommonInformationMetrics extends MetricsContainer {
     // которому на вход подают лишб заголовок таблицы
     @Override
     public void build() {
-        addRow(new MetricsRow("Метрика", List.of("Значение")));
+        addRow(new MetricsRow(List.of("Метрика", "Значение")));
         //TODO: добавить файлы
 
         collectors.forEach(collector -> addRows(collector.getMetrics(cols)));

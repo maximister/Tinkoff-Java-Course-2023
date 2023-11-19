@@ -10,6 +10,7 @@ public class MetricsAndCollectorsHandler {
     //TODO: проверить, что временной фильтр первый
     private List<MetricsContainer> tables;
     private List<StatisticsCollector> collectors;
+    private boolean wasBuild;
 
     public MetricsAndCollectorsHandler(OffsetDateTime from, OffsetDateTime to) {
         tables = List.of(
@@ -17,6 +18,8 @@ public class MetricsAndCollectorsHandler {
             new RequestedResourcesMetrics(),
             new ResponseStatusMetrics()
         );
+
+        wasBuild = false;
     }
 
     public void buildChainOfCollectors() {
@@ -41,7 +44,10 @@ public class MetricsAndCollectorsHandler {
     }
 
     public List<MetricsContainer> getTables() {
-        tables.forEach(MetricsContainer::build);
+        if (!wasBuild) {
+            tables.forEach(MetricsContainer::build);
+            wasBuild = true;
+        }
         return tables;
     }
 }

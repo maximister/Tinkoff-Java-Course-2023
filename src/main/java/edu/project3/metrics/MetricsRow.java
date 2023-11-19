@@ -4,8 +4,8 @@ import java.util.List;
 import lombok.Builder;
 
 @Builder
-public record MetricsRow(String name, List<String> values) {
+public record MetricsRow(List<String> values) {
     public boolean isValid(int cols) {
-        return cols == (values.size() + 1);
+        return cols == values.size();
     }
 }

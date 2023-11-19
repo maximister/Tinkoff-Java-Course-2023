@@ -40,8 +40,7 @@ public class StatusCollector extends StatisticsCollector {
         return statusMap.entrySet().stream()
             .map(entry ->
                 MetricsRow.builder()
-                    .name(Long.toString(statusMap.get(entry.getKey())))
-                    .values(List.of(
+                    .values(List.of(Long.toString(entry.getKey()),
                         httpStatusCodesHandler.getHttpStatusDescription(entry.getKey()),
                         Long.toString(entry.getValue())
                     ))

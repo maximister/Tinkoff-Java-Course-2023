@@ -12,7 +12,7 @@ public class RequestedResourcesMetrics extends MetricsContainer {
 
     @Override
     public void build() {
-        addRow(new MetricsRow("Ресурс", List.of("Количество")));
+        addRow(new MetricsRow(List.of("Ресурс", "Количество")));
         collectors.forEach(collector -> addRows(collector.getMetrics(cols)));
     }
 }

@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public abstract class MetricsContainer {
     //название таблицы
-    protected String header;
+    @Getter protected String header;
     protected List<MetricsRow> table = new ArrayList<>();
     @Getter protected List<StatisticsCollector> collectors;
     protected int rows;
@@ -27,6 +27,10 @@ public abstract class MetricsContainer {
 
     public void addRow(MetricsRow row) {
         table.add(row);
+    }
+
+    public List<MetricsRow> getTableRows() {
+        return table;
     }
 
     @Override public String toString() {

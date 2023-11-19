@@ -37,12 +37,10 @@ public class TimeController extends StatisticsCollector {
 
         return List.of(
             MetricsRow.builder()
-                .name("Начальная дата")
-                .values(List.of(startDate))
+                .values(List.of("Начальная дата", startDate))
                 .build(),
             MetricsRow.builder()
-                .name("Конечная дата")
-                .values(List.of(endDate))
+                .values(List.of("Конечная дата", endDate))
                 .build()
         );
     }

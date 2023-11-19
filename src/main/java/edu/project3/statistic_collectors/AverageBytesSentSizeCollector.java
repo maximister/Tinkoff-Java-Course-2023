@@ -33,11 +33,10 @@ public class AverageBytesSentSizeCollector extends StatisticsCollector {
     @Override
     public List<MetricsRow> getMetrics(int cols) {
         MetricsRow requestAmount
-            = new MetricsRow("Количество запросов", List.of(Long.toString(amount)));
+            = new MetricsRow(List.of("Количество запросов", Long.toString(amount)));
         MetricsRow avgBytesSent
-            = new MetricsRow(
-            "Средний размер ответа",
-            List.of(Long.toString(getAverageBytesSentSize()) + "b")
+            = new MetricsRow(List.of("Средний размер ответа",
+            Long.toString(getAverageBytesSentSize()) + "b")
         );
 
         if (!requestAmount.isValid(cols) || !avgBytesSent.isValid(cols)) {

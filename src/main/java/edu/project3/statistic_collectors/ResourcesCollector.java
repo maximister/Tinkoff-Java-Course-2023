@@ -33,8 +33,7 @@ public class ResourcesCollector extends StatisticsCollector {
 
         return resourceMap.entrySet().stream()
             .map(entry -> MetricsRow.builder()
-                .name(entry.getKey())
-                .values(List.of(Long.toString(entry.getValue())))
+                .values(List.of(entry.getKey(), Long.toString(entry.getValue())))
                 .build())
             .toList();
     }
