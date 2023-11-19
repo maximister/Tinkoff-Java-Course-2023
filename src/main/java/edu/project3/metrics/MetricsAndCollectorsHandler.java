@@ -20,7 +20,7 @@ public class MetricsAndCollectorsHandler {
     }
 
     public void buildChainOfCollectors() {
-        if (tables == null) {
+        if (collectors == null) {
             getCollectors();
         }
 
@@ -38,5 +38,10 @@ public class MetricsAndCollectorsHandler {
         if (collectors != null && !collectors.isEmpty()) {
             collectors.get(0).processLog(log);
         }
+    }
+
+    public List<MetricsContainer> getTables() {
+        tables.forEach(MetricsContainer::build);
+        return tables;
     }
 }

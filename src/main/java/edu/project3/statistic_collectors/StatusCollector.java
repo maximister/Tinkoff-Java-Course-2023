@@ -19,6 +19,7 @@ public class StatusCollector extends StatisticsCollector {
         collectorsName = "StatusCollector";
         LOGGER.info(collectorsName + " was created");
         httpStatusCodesHandler = new HttpStatusCodesHandler(CODES_PATH);
+        statusMap = new HashMap<>();
     }
 
     @Override
