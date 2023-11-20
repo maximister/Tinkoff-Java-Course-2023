@@ -2,7 +2,6 @@ package edu.project3.renderers;
 
 import edu.project3.metrics.MetricsContainer;
 import edu.project3.metrics.MetricsRow;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractRenderer implements TableRenderer {

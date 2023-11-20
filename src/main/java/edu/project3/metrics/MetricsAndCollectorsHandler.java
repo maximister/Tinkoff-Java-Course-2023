@@ -10,16 +10,16 @@ public class MetricsAndCollectorsHandler {
     private List<MetricsContainer> tables;
     private List<StatisticsCollector> collectors;
     private boolean wasBuild;
-    private String sources;
 
     public MetricsAndCollectorsHandler(OffsetDateTime from, OffsetDateTime to, String sources) {
         tables = List.of(
             new CommonInformationMetrics(from, to, sources),
             new RequestedResourcesMetrics(),
-            new ResponseStatusMetrics()
+            new ResponseStatusMetrics(),
+            new HttpMethodsMetrics(),
+            new UserAgentMetrics()
         );
 
-        this.sources = sources;
         wasBuild = false;
     }
 

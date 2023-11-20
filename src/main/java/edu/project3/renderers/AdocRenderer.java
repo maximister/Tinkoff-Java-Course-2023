@@ -38,12 +38,15 @@ public class AdocRenderer extends AbstractRenderer {
     public String addRow(List<String> row, int[] columnsWidth) {
         StringBuilder renderedRow = new StringBuilder();
         renderedRow.append(WALL);
-        for (int i = 0; i < row.size(); i++) {
+        for (int i = 0; i < row.size() - 1; i++) {
             String cell = row.get(i);
             int whitespace = columnsWidth[i] - cell.length();
             renderedRow.append(" ".repeat(whitespace)).append(cell);
             renderedRow.append(WALL);
         }
+        String cell = row.get(row.size() - 1);
+        int whitespace = columnsWidth[row.size() - 1] - cell.length();
+        renderedRow.append(" ".repeat(whitespace)).append(cell);
         renderedRow.append("\n");
 
         return renderedRow.toString();
@@ -56,7 +59,7 @@ public class AdocRenderer extends AbstractRenderer {
 
         header.append(WALL)
             .append(ROW.repeat(rowLength + columnsWidth.length - 1))
-            .append(WALL).append("\n");
+            .append("\n");
 
         return header.toString();
     }
