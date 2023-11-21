@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class StatusCollector extends StatisticsCollector {
-    private Map<Integer, Long> statusMap;
-    private HttpStatusCodesHandler httpStatusCodesHandler;
+    private final Map<Integer, Long> statusMap;
+    private final HttpStatusCodesHandler httpStatusCodesHandler;
     private final static Path CODES_PATH
         = Path.of("src", "main", "java", "edu", "project3", "http_status_codes", "codes.txt");
 

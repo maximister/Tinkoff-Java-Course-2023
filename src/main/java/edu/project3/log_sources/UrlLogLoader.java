@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UrlLogLoader implements LogsSource {
     private String logs;
-    private String source;
+    private final String source;
 
     public UrlLogLoader(String url) {
         source = url;

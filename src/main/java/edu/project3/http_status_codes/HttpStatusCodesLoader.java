@@ -27,10 +27,9 @@ public class HttpStatusCodesLoader {
                 .select("ul")
                 .select("ul")
                 .select("li")
-                .select("ul");
-
-            //parsing and writing
-            doc.forEach(line -> {
+                .select("ul")
+                .select("a")
+                .forEach(line -> {
                 Matcher matcher = STATUS_PATTERN.matcher(line.text());
                 while (matcher.find()) {
                     try {
