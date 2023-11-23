@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class NginxLogParser {
@@ -27,8 +29,11 @@ public class NginxLogParser {
             + "\"(?<httpUserAgent>.*)\"$");
     private static final DateTimeFormatter DATE_TIME_FORMATTER
         = DateTimeFormatter.ofPattern("dd/LLL/yyyy:HH:mm:ss ZZ", Locale.US);
+    private final static Logger LOGGER = LogManager.getLogger();
+
 
     public NginxLogParser() {
+        LOGGER.info("LogParser was created");
     }
 
     public List<NginxLogRecord> parseLogs(List<String> logs) {
@@ -39,7 +44,7 @@ public class NginxLogParser {
     public NginxLogRecord parseLog(String log) {
         Matcher matcher = NGINX_LOG_PATTERN.matcher(log);
         if (!matcher.matches()) {
-            throw new IllegalStateException("Invalid log format:\n" + log);
+            throw new IllegalArgumentException("Invalid log format:\n" + log);
         }
 
         String address = matcher.group("remoteAddr");
@@ -66,7 +71,7 @@ public class NginxLogParser {
             = Pattern.compile("(?<method>.*) (?<url>.*) (?<protocol>.*)");
         Matcher matcher = requestPattern.matcher(request);
         if (!matcher.matches()) {
-            throw new IllegalStateException("Invalid request format:\n" + request);
+            throw new IllegalArgumentException("Invalid request format:\n" + request);
         }
 
         return LogRequest.builder()

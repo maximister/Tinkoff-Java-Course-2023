@@ -3,12 +3,16 @@ package edu.project3.renderers;
 import edu.project3.metrics.MetricsContainer;
 import edu.project3.metrics.MetricsRow;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MarkdownRenderer extends AbstractRenderer {
 
     private final static String WALL = "|";
+    private final static Logger LOGGER = LogManager.getLogger();
 
     public MarkdownRenderer() {
+        LOGGER.info("markdown Renderer was created");
     }
 
     @Override
@@ -45,6 +49,7 @@ public class MarkdownRenderer extends AbstractRenderer {
             renderedTable.append(addRow(rows.get(i).values(), columnsWidth));
         }
 
+        LOGGER.info("Table " + table.getHeader() + " was rendered");
         return renderedTable.toString();
     }
 

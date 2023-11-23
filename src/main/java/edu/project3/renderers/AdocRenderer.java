@@ -4,13 +4,17 @@ import edu.project3.metrics.MetricsContainer;
 import edu.project3.metrics.MetricsRow;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AdocRenderer extends AbstractRenderer {
 
     private final static String WALL = "|";
     private final static String ROW = "=";
+    private final static Logger LOGGER = LogManager.getLogger();
 
     public AdocRenderer() {
+        LOGGER.info("adoc Renderer was created");
     }
 
     @Override
@@ -26,6 +30,8 @@ public class AdocRenderer extends AbstractRenderer {
             renderedTable.append(addRow(rows.get(i).values(), columnsWidth));
         }
         renderedTable.append(addTableHeader(columnsWidth));
+
+        LOGGER.info("Table " + table.getHeader() + " was rendered");
         return renderedTable.toString();
     }
 

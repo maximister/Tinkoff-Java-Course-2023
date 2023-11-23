@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class HttpStatusCodesLoader {
 
     private final Path fileForSaving;
+    private static final Logger LOGGER = LogManager.getLogger();
     private final static String URL
         = "https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_"
         + "%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP";
@@ -39,6 +42,7 @@ public class HttpStatusCodesLoader {
                     }
                 }
             });
+            LOGGER.info("Http status codes list was created");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

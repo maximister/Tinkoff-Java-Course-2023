@@ -4,9 +4,12 @@ import edu.project3.statistic_collectors.AverageBytesSentSizeCollector;
 import edu.project3.statistic_collectors.TimeController;
 import java.time.OffsetDateTime;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CommonInformationMetrics extends MetricsContainer {
     private final String sources;
+    private final static Logger LOGGER = LogManager.getLogger();
 
     public CommonInformationMetrics(OffsetDateTime from, OffsetDateTime to, String sources) {
         this.header = "Общая информация";
@@ -24,5 +27,7 @@ public class CommonInformationMetrics extends MetricsContainer {
                 .build()
         );
         collectors.forEach(collector -> addRows(collector.getMetrics(cols)));
+
+        LOGGER.info("Common Information table was built");
     }
 }

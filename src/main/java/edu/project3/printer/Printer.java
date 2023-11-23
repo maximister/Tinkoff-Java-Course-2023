@@ -1,11 +1,11 @@
 package edu.project3.printer;
 
-public class TablePrinter {
-    public TablePrinter() {
+public class Printer {
+    public Printer() {
     }
 
     @SuppressWarnings("checkstyle:RegexpSinglelineJava")
-    public void printTable(String renderedTable) {
+    public void printReport(String renderedTable) {
         System.out.println(renderedTable);
     }
 }

@@ -10,14 +10,19 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LocalFileLogLoader implements LogsSource {
     private final List<Path> files;
     private String source;
     private final static String NO_VALID_FILES
         = "there are no log files in your directory. Please try again";
+    private final static Logger LOGGER = LogManager.getLogger();
+
 
     public LocalFileLogLoader(String directoryPath) {
+        LOGGER.info("FileLoader was created");
         files = parseFilePaths(directoryPath);
     }
 
@@ -37,6 +42,7 @@ public class LocalFileLogLoader implements LogsSource {
                     return FileVisitResult.CONTINUE;
                 }
             });
+            LOGGER.info("File path was parsed");
         } catch (IOException e) {
             throw new RuntimeException(NO_VALID_FILES);
         }
@@ -58,6 +64,7 @@ public class LocalFileLogLoader implements LogsSource {
             logsList.addAll(getLogsFromFile(file));
         });
 
+        LOGGER.info("Log list was created");
         return logsList;
     }
 
