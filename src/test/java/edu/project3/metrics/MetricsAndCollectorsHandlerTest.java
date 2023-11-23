@@ -15,7 +15,9 @@ import edu.project3.statistic_collectors.TimeController;
 import edu.project3.statistic_collectors.UserAgentCollector;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 
 public class MetricsAndCollectorsHandlerTest {
     @Test
@@ -31,6 +33,9 @@ public class MetricsAndCollectorsHandlerTest {
         // но цепь не хочет строиться из мокнутых объектов(((
         //поэтому оставил пока какой-то формальный тест, чтобы поднять ковераге,
         //в котором просто посчитал количество элементов цепи
+
+        //P.P.S в итоге получилось сделать задуманное ниже с помощью spy,
+        //но это кринжобе оставил для поднятия кавераге))
 
         MetricsAndCollectorsHandler handler
             = new MetricsAndCollectorsHandler(OffsetDateTime.MIN, OffsetDateTime.MAX, "source");
@@ -57,6 +62,56 @@ public class MetricsAndCollectorsHandlerTest {
         }
     }
 
+    @Test
+    @DisplayName("testing that chain was correctly built")
+    public void handler_ShouldBuildCorrectChain() {
+        /*Собственно тут я решил подменить список collectors и убедиться,
+         что цепь построена верно с помощью подсчета количества вызовов метода сбора информации*/
+        //метод getTables я как-то детально не проверял,
+        // тк он просто вызывает в цикле build для всех таблиц, которые я проверил в персональных тестах
+
+        OffsetDateTime from = OffsetDateTime.MIN;
+        OffsetDateTime to = OffsetDateTime.MAX;
+
+        MetricsAndCollectorsHandler handler = new MetricsAndCollectorsHandler(from, to, "source");
+        List<StatisticsCollector> collectors = getMockedCollectors();
+
+        try {
+            Field collectorsField = handler.getClass().getDeclaredField("collectors");
+            collectorsField.setAccessible(true);
+            collectorsField.set(handler, collectors);
+
+            handler.buildChainOfCollectors();
+            getLogsList().forEach(handler::processLog);
+
+            collectors.forEach(collector -> Mockito.verify(collector, Mockito.times(3)).processLog(any()));
+
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private static List<StatisticsCollector> getMockedCollectors() {
+        OffsetDateTime from = OffsetDateTime.MIN;
+        OffsetDateTime to = OffsetDateTime.MAX;
+
+        StatisticsCollector spyTc = Mockito.spy(new TimeController(from, to));
+        StatisticsCollector spyAb = Mockito.spy(new AverageBytesSentSizeCollector());
+        StatisticsCollector spyM = Mockito.spy(new MethodsCollector());
+        StatisticsCollector spyRes = Mockito.spy(new ResourcesCollector());
+        StatisticsCollector spySt = Mockito.spy(new StatusCollector());
+        StatisticsCollector spyUa = Mockito.spy(new UserAgentCollector());
+
+       return List.of(
+            spyTc,
+            spyUa,
+            spyAb,
+            spyM,
+            spyRes,
+            spySt
+        );
+    }
     private static List<NginxLogRecord> getLogsList() {
         return List.of(
             NginxLogRecord.builder()

@@ -20,16 +20,15 @@ public class LocalFileLogLoader implements LogsSource {
         = "there are no log files in your directory. Please try again";
     private final static Logger LOGGER = LogManager.getLogger();
 
-
     public LocalFileLogLoader(String directoryPath) {
         LOGGER.info("FileLoader was created");
         files = parseFilePaths(directoryPath);
     }
 
-    private  List<Path> parseFilePaths(String stringPath) {
+    private List<Path> parseFilePaths(String stringPath) {
         List<Path> matchedFiles = new ArrayList<>();
         Path dir = Path.of("src", "main", "java", "edu", "project3", "resources");
-        source = dir + stringPath;
+        source = stringPath.startsWith("[/*\\]{1,2}") ? dir + stringPath : dir + "\\" + stringPath;
         PathMatcher pathMatcher = FileSystems.getDefault()
             .getPathMatcher("glob:" + "**/" + stringPath + "*");
         try {
@@ -42,6 +41,11 @@ public class LocalFileLogLoader implements LogsSource {
                     return FileVisitResult.CONTINUE;
                 }
             });
+
+            if (matchedFiles.isEmpty()) {
+                throw new RuntimeException(NO_VALID_FILES);
+            }
+
             LOGGER.info("File path was parsed");
         } catch (IOException e) {
             throw new RuntimeException(NO_VALID_FILES);
