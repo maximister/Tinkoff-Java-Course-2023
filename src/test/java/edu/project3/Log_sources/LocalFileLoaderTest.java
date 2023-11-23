@@ -1,26 +1,14 @@
 package edu.project3.Log_sources;
 
-import edu.project3.log_sources.LocalFileLogLoader;
-import edu.project3.logs.log_structure.LogRequest;
-import edu.project3.logs.log_structure.LogResponse;
-import edu.project3.logs.log_structure.NginxLogRecord;
+import edu.project3.log_sources.LocalFileLogLoader;;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
-import java.time.OffsetDateTime;
 import java.util.List;
-import edu.project3.statistic_collectors.AverageBytesSentSizeCollector;
-import edu.project3.statistic_collectors.MethodsCollector;
-import edu.project3.statistic_collectors.ResourcesCollector;
-import edu.project3.statistic_collectors.StatisticsCollector;
-import edu.project3.statistic_collectors.StatusCollector;
-import edu.project3.statistic_collectors.TimeController;
-import edu.project3.statistic_collectors.UserAgentCollector;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
+
 public class LocalFileLoaderTest {
     @Test
     @DisplayName("invalid file path")
@@ -32,7 +20,7 @@ public class LocalFileLoaderTest {
 
     @Test
     @DisplayName("testing work with correct file path")
-    public void localFileLoader_whenGivenInvalidPath_shouldCreateLogsList() {
+    public void localFileLoader_whenGivenCorrectPath_shouldCreateLogsList() {
         LocalFileLogLoader loader = new LocalFileLogLoader("local Logs.txt");
         Path expectedSource = Path.of("src", "main", "java", "edu", "project3", "resources");
 

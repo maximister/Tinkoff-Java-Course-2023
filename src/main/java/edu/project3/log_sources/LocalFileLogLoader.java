@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 
 public class LocalFileLogLoader implements LogsSource {
     private final List<Path> files;
+    private final static String DELIMITER
+        = System.getProperty("os.name").startsWith("Windows") ? "\\" : "/";
+
     private String source;
     private final static String NO_VALID_FILES
         = "there are no log files in your directory. Please try again";
@@ -28,9 +31,9 @@ public class LocalFileLogLoader implements LogsSource {
     private List<Path> parseFilePaths(String stringPath) {
         List<Path> matchedFiles = new ArrayList<>();
         Path dir = Path.of("src", "main", "java", "edu", "project3", "resources");
-        source = stringPath.startsWith("[/*\\]{1,2}") ? dir + stringPath : dir + "\\" + stringPath;
+        source = stringPath.startsWith("[/*\\]{1,2}") ? dir + stringPath : dir + DELIMITER + stringPath;
         PathMatcher pathMatcher = FileSystems.getDefault()
-            .getPathMatcher("glob:" + "**/" + stringPath + "*");
+            .getPathMatcher("glob:" + "**" + DELIMITER + stringPath + "*");
         try {
             Files.walkFileTree(dir, new SimpleFileVisitor<>() {
                 @Override
