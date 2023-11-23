@@ -46,8 +46,4 @@ public class AverageBytesSentSizeCollector extends StatisticsCollector {
     private long getAverageBytesSentSize() {
         return allBytesSent.divide(BigInteger.valueOf(amount)).longValueExact();
     }
-
-    private long getRequestAmount() {
-        return amount;
-    }
 }

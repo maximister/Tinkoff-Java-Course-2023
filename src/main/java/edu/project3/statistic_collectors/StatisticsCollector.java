@@ -15,7 +15,6 @@ public abstract class StatisticsCollector {
     private StatisticsCollector nextCollector;
     protected String collectorsName;
     protected final static String ROW_SIZE_ERROR = "Impossible to add this row to table";
-    @Getter protected String statisticsName;
     protected static final Logger LOGGER = LogManager.getLogger();
 
     public void setNextCollector(StatisticsCollector nextCollector) {

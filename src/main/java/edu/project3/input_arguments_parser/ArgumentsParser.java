@@ -17,7 +17,6 @@ public class ArgumentsParser {
     private final String unparsedInput;
     @Getter private final ParsedInput parsedInput;
     private final static Logger LOGGER = LogManager.getLogger();
-
     private final static Pattern ARGUMENT_PATTERN
         = Pattern.compile("--(path|from|to|format)\\s(\\S+)");
     private static final DateTimeFormatter DATE_TIME_FORMATTER
@@ -58,7 +57,7 @@ public class ArgumentsParser {
                     break;
                 case "to":
                     to = OffsetDateTime.of(LocalDate.parse(value, DATE_TIME_FORMATTER),
-                        LocalTime.MIN, ZoneOffset.UTC
+                        LocalTime.MAX, ZoneOffset.UTC
                     );
                     break;
                 case "format":

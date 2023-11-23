@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ResourcesCollector extends StatisticsCollector {
 
-    private Map<String, Long> resourceMap;
+    private final Map<String, Long> resourceMap;
 
     public ResourcesCollector() {
         collectorsName = "ResourcesCollector";
@@ -36,9 +36,5 @@ public class ResourcesCollector extends StatisticsCollector {
                 .values(List.of(entry.getKey(), Long.toString(entry.getValue())))
                 .build())
             .toList();
-    }
-
-    public Map<String, Long> getResourceMap() {
-        return resourceMap;
     }
 }

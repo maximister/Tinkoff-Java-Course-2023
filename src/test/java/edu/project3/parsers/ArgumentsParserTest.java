@@ -79,7 +79,7 @@ public class ArgumentsParserTest {
         ParsedInput parsedInput1 = ParsedInput.builder()
             .path("logs/2023*")
             .from(OffsetDateTime.of(LocalDate.parse("2023-08-31", formatter), LocalTime.MIN, ZoneOffset.UTC))
-            .to(OffsetDateTime.of(LocalDate.parse("2030-01-20", formatter), LocalTime.MIN, ZoneOffset.UTC))
+            .to(OffsetDateTime.of(LocalDate.parse("2030-01-20", formatter), LocalTime.MAX, ZoneOffset.UTC))
             .format("markdown")
             .build();
 
