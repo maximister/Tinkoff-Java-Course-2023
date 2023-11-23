@@ -1,6 +1,6 @@
 package edu.project3.Log_sources;
 
-import edu.project3.log_sources.LocalFileLogLoader;;
+import edu.project3.log_sources.LocalFileLogLoader;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.util.List;
