@@ -31,7 +31,7 @@ public class LocalFileLogLoader implements LogsSource {
     private List<Path> parseFilePaths(String stringPath) {
         List<Path> matchedFiles = new ArrayList<>();
         Path dir = Path.of("src", "main", "java", "edu", "project3", "resources");
-        source = stringPath.startsWith("[/*\\]{1,2}") ? dir + stringPath : dir + DELIMITER + stringPath;
+        source = stringPath.startsWith("\\") ? dir + stringPath : dir + DELIMITER + stringPath;
         PathMatcher pathMatcher = FileSystems.getDefault()
             .getPathMatcher("glob:" + "**" + DELIMITER + stringPath + "*");
         try {
