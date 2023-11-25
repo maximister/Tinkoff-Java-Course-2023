@@ -33,7 +33,7 @@ public class LocalFileLogLoader implements LogsSource {
         Path dir = Path.of("src", "main", "java", "edu", "project3", "resources");
         source = stringPath.startsWith("\\") ? dir + stringPath : dir + DELIMITER + stringPath;
         PathMatcher pathMatcher = FileSystems.getDefault()
-            .getPathMatcher("glob:" + "**" + DELIMITER + stringPath + "*");
+            .getPathMatcher("glob:" + "**/" + stringPath + "*");
         try {
             Files.walkFileTree(dir, new SimpleFileVisitor<>() {
                 @Override

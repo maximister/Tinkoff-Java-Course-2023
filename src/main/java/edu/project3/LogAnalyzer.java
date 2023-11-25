@@ -56,9 +56,8 @@ public class LogAnalyzer {
 
     @SuppressWarnings("checkstyle:UncommentedMain")
     public static void main(String[] args) {
-        //java -jar nginx-log-stats.jar --path logs/2023* --from 2023-08-31 --format markdown
-        String input = "java -jar nginx-log-stats.jar --path https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs  --format markdown";
-        //String input = "java -jar nginx-log-stats.jar --path *  --format adoc";
+        //String input = "java -jar nginx-log-stats.jar --path https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs  --format markdown";
+        String input = "java -jar nginx-log-stats.jar --path *  --format adoc";
         //String input = "java -jar nginx-log-stats.jar --path *  --format markdown";
         LogAnalyzer analyzer = new LogAnalyzer(input);
     }
