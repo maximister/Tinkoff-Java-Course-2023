@@ -10,6 +10,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +40,9 @@ public class LocalFileLogLoader implements LogsSource {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     if (pathMatcher.matches(file)) {
-                        matchedFiles.add(file);
+                        if ("txt".equals(FilenameUtils.getExtension(file.toString()))) {
+                            matchedFiles.add(file);
+                        }
                     }
                     return FileVisitResult.CONTINUE;
                 }

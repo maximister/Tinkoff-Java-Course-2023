@@ -24,7 +24,7 @@ public abstract class AbstractRenderer implements TableRenderer {
 
     public abstract String addHeader(String header);
 
-    public abstract String addRow(List<String> row, int[] columnsWidth);
+    protected abstract String addRow(List<String> row, int[] columnsWidth);
 
     public abstract String addTableHeader(int[] columnsWidth);
 }

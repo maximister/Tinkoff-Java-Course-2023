@@ -21,7 +21,7 @@ public class MarkdownRenderer extends AbstractRenderer {
     }
 
     @Override
-    public String addRow(List<String> row, int[] columnWidth) {
+    protected String addRow(List<String> row, int[] columnWidth) {
         StringBuilder renderedRow = new StringBuilder();
         renderedRow.append(WALL);
         for (int i = 0; i < row.size(); i++) {

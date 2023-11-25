@@ -61,5 +61,4 @@ public class LogAnalyzer {
         //String input = "java -jar nginx-log-stats.jar --path *  --format markdown";
         LogAnalyzer analyzer = new LogAnalyzer(input);
     }
-
 }
