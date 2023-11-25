@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 /*хз как лучше назвать класс, собирающий статистики
   Слово Collector вызывает у менея стойкие ассоциации с Collections и тд,
   но что-то лучше я пока не придумал*/
+
 @Getter
 public abstract class StatisticsCollector {
     private StatisticsCollector nextCollector;

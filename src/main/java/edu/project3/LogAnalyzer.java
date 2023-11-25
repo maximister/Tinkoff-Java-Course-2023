@@ -56,8 +56,10 @@ public class LogAnalyzer {
 
     @SuppressWarnings("checkstyle:UncommentedMain")
     public static void main(String[] args) {
+        //с консоли не запускал, только в идее аргументы менял
+        String input = String.join(" ", args);
         //String input = "java -jar nginx-log-stats.jar --path https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs  --format markdown";
-        String input = "java -jar nginx-log-stats.jar --path *  --format adoc";
+        //String input = "java -jar nginx-log-stats.jar --path *  --format adoc";
         //String input = "java -jar nginx-log-stats.jar --path *  --format markdown";
         LogAnalyzer analyzer = new LogAnalyzer(input);
     }
