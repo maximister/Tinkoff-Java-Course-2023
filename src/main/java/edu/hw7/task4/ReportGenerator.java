@@ -45,11 +45,11 @@ public class ReportGenerator {
 
             if (threads > 1) {
                 start = System.nanoTime();
-                pi = computer.computePiInOneThread(iter);
+                pi = computer.computePiMultiThreading(iter, threads);
                 end = System.nanoTime();
             } else {
                 start = System.nanoTime();
-                pi = computer.computePiMultiThreading(iter, threads);
+                pi = computer.computePiInOneThread(iter);
                 end = System.nanoTime();
             }
 
@@ -86,6 +86,6 @@ public class ReportGenerator {
     private double getPiCalculationError(double pi) {
         //не особо понял, какую погрешность от меня хотят в условии,
         // посчитал относительную (что помню с лаб по физике, бррр)
-        return Math.abs(Math.PI - pi) * TO_PERCENT;
+        return Math.abs(Math.PI - pi) / Math.PI * TO_PERCENT;
     }
 }

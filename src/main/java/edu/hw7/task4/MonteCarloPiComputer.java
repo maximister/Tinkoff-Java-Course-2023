@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 public class MonteCarloPiComputer {
     private static final double MONTE_CARLO_CONST = 4;
@@ -54,6 +55,10 @@ public class MonteCarloPiComputer {
                 circleCount += future.get();
             }
 
+            executorService.shutdown();
+            if (!executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS)) {
+                throw new RuntimeException();
+            }
             return MONTE_CARLO_CONST * (circleCount / iterations);
 
         } catch (ExecutionException | InterruptedException e) {
