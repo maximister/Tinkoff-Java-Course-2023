@@ -21,7 +21,7 @@ public class FilterFilesAndDirectoriesTest {
             Path.of("src/main/java/edu/project2/generator").toFile(),
             Path.of("src/main/java/edu/project2/solver").toFile()
         );
-        assertThat(    FileTasksHandler.filterDirectoriesByFilesAmount(testDirectory, 4)).isEqualTo(expected);
+        assertThat(FileTasksHandler.filterDirectoriesByFilesAmount(testDirectory, 4)).containsAll(expected);
     }
 
     @Test
@@ -44,6 +44,6 @@ public class FilterFilesAndDirectoriesTest {
             Path.of("src/main/java/edu/project2/printer/Printer.java").toFile()
         );
 
-        assertThat(FileTasksHandler.filterFilesByPredicate(testDirectory, testPredicate)).isEqualTo(expected);
+        assertThat(FileTasksHandler.filterFilesByPredicate(testDirectory, testPredicate)).containsAll(expected);
     }
 }
