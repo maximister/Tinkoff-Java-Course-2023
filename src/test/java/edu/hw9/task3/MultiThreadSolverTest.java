@@ -20,7 +20,6 @@ public class MultiThreadSolverTest {
     public void MultiThreadDfsSolverTest() {
         Generator generator = new DfsGenerator();
         Maze maze = generator.generate(51, 51);
-        Renderer renderer = new ConsoleRenderer();
         Solver multiThreadSolver = new MultiThreadDfsSolver();
         Solver oneThreadSolver = new DfsSolver();
 

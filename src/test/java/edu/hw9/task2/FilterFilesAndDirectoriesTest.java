@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.jupiter.api.DisplayName;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FilterFilesAndDirectoriesTest {

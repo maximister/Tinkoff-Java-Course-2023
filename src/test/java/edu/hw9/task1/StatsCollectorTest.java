@@ -1,6 +1,5 @@
 package edu.hw9.task1;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.HashMap;
@@ -9,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StatsCollectorTest {
     @Test
@@ -19,9 +19,10 @@ public class StatsCollectorTest {
         executorService.execute(() -> collector.push("dataset1", new double[] {0.1, 0.2, 1.4, 5.1, 0.3}));
         executorService.execute(() -> collector.push("dataset2", new double[] {1, 2, 3, 4, 5}));
         executorService.shutdown();
-        executorService.awaitTermination(10, TimeUnit.MILLISECONDS);
+        executorService.awaitTermination(10000, TimeUnit.NANOSECONDS);
 
-        Assertions.assertEquals(collector.stats(), new HashMap<>(Map.of(
+        System.out.println(collector.stats());
+        assertThat(collector.stats()).isEqualTo(new HashMap<>(Map.of(
             "dataset1", List.of(7.1, 1.42, 5.1, 0.1),
             "dataset2", List.of(15.0, 3.0, 5.0, 1.0)
         )));
