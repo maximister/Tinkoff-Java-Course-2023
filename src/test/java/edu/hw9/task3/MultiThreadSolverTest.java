@@ -1,7 +1,6 @@
 package edu.hw9.task3;
 
 import com.google.common.collect.Lists;
-import edu.hw9.task3.MultiThreadDfsSolver;
 import edu.project2.generator.DfsGenerator;
 import edu.project2.generator.Generator;
 import edu.project2.renderer.ConsoleRenderer;
@@ -12,7 +11,6 @@ import edu.project2.structures.Coordinate;
 import edu.project2.structures.Maze;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.Collections;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
