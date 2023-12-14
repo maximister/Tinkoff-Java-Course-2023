@@ -9,17 +9,7 @@ import edu.project4.model.Rect;
 import edu.project4.renderer.RenderSettings;
 import edu.project4.renderer.Renderer;
 import edu.project4.renderer.RendererFactory;
-import edu.project4.transformations.DiskTransformation;
-import edu.project4.transformations.HandkerchiefTransformation;
-import edu.project4.transformations.HeartTransformation;
-import edu.project4.transformations.HyperbolicTransformation;
-import edu.project4.transformations.LinearTransformation;
-import edu.project4.transformations.SinusoidalTransformation;
-import edu.project4.transformations.SphericalTransformation;
-import edu.project4.transformations.SwirlTransformation;
-import edu.project4.transformations.Transformation;
 import java.nio.file.Path;
-import java.util.List;
 
 public class FractalFlameGenerator {
 
