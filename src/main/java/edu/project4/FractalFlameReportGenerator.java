@@ -12,10 +12,10 @@ import edu.project4.transformations.SinusoidalTransformation;
 import edu.project4.transformations.SphericalTransformation;
 import edu.project4.transformations.SwirlTransformation;
 import edu.project4.transformations.Transformation;
-import net.steppschuh.markdowngenerator.table.Table;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import net.steppschuh.markdowngenerator.table.Table;
 
 public class FractalFlameReportGenerator {
     private final double gamma = 0.9;
