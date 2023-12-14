@@ -1,6 +1,5 @@
 package edu.project4.utils;
 
-import edu.project4.model.Pixel;
 import edu.project4.model.Point;
 import edu.project4.model.Rect;
 import java.util.List;

@@ -1,4 +1,4 @@
-package edu;
+package edu.project4;
 
 import edu.project4.imageCreator.ImageFormat;
 import edu.project4.imageCreator.ImageUtils;
