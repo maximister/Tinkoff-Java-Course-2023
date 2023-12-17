@@ -1,6 +1,5 @@
 package edu.hw10.task2;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -67,17 +66,18 @@ public class CacheProxy implements InvocationHandler {
     }
 
     private void save(Method method) {
-        String cacheFilePath = path.toString()
-            + "/" + method.getName() + FILE_EXTENSION;
+        Path cacheFilePath = Path.of(path.toString()
+            + "/" + method.getName() + FILE_EXTENSION);
 
-        if (!Files.exists(Path.of(cacheFilePath))) {
+        if (!Files.exists(cacheFilePath)) {
             try {
-                Files.createFile(Path.of(cacheFilePath));
+                Files.createFile(cacheFilePath);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(cacheFilePath))) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(
+            new FileOutputStream(cacheFilePath.toString()))) {
             outputStream.writeObject(cache);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -85,6 +85,12 @@ public class CacheProxy implements InvocationHandler {
     }
 
     private void load(Method method) {
+        Path cacheFilePath = Path.of(path.toString()
+            + "/" + method.getName() + FILE_EXTENSION);
+
+        if (!Files.exists(cacheFilePath)) {
+            return;
+        }
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path.toString()
             + "/" + method.getName() + FILE_EXTENSION))) {
             Object object = inputStream.readObject();

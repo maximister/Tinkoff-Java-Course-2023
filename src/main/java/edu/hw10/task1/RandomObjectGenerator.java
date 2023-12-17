@@ -39,7 +39,7 @@ public class RandomObjectGenerator {
     }
 
     public <T> T nextObject(Class<T> requiredClass) {
-        Constructor<?> constructor = findMaxArgsConstructor(requiredClass);
+        Constructor<?> constructor = getRandomConstructor(requiredClass);
         Parameter[] parameters = constructor.getParameters();
         Object[] objectList = generateRandomObjects(parameters);
 
@@ -71,21 +71,6 @@ public class RandomObjectGenerator {
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private Constructor<?> findMaxArgsConstructor(Class<?> newClass) {
-        Constructor<?> constructor = null;
-        int parameterCount = -1;
-        for (Constructor<?> construct : newClass.getConstructors()) {
-            if (construct.getParameterCount() > parameterCount) {
-                constructor = construct;
-                parameterCount = constructor.getParameterCount();
-            }
-        }
-        if (constructor == null) {
-            throw new IllegalArgumentException("Class without not default constructor");
-        }
-        return constructor;
     }
 
     private Constructor<?> getRandomConstructor(Class<?> newClass) {
