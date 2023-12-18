@@ -13,9 +13,14 @@ public class CacheProxyTest {
     @Test
     @DisplayName("testing cacheProxy with fibCalculator")
     void cacheProxy_shouldCacheFibonacciNumbers() {
-        Path testFilePath = Path.of("src/main/java/edu/hw10/task2/dir_for_cache/", "fib.txt");
+        Path dirPath = Path.of("src/main/java/edu/hw10/task2/dir_for_cache/");
+        Path testFilePath = Path.of(dirPath.toString(), "fib.txt");
         if (Files.exists(testFilePath)) {
             Files.delete(testFilePath);
+        }
+
+        if (!Files.exists(dirPath)) {
+            Files.createDirectories(dirPath);
         }
 
         FibCalculator fibCalculator = new MyFibCalculator();
@@ -28,7 +33,6 @@ public class CacheProxyTest {
         long cacheStart = System.nanoTime();
         long cacheResult = proxy.fib(20);
         long cacheEnd = System.nanoTime();
-
 
         assertAll(
             () -> assertThat(noCacheEnd - noCacheStart).isGreaterThan(cacheEnd - cacheStart),
