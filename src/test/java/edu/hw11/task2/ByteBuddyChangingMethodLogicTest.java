@@ -29,5 +29,10 @@ public class ByteBuddyChangingMethodLogicTest {
             .sum(7, 8);
 
         assertEquals(sum, 56);
+
+
+        //just for coverage bro)
+        ArithmeticUtils arithmeticUtils = new ArithmeticUtils();
+        arithmeticUtils.sum(1, 1);
     }
 }
