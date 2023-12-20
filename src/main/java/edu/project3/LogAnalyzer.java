@@ -9,6 +9,7 @@ import edu.project3.metrics.MetricsContainer;
 import edu.project3.printer.Printer;
 import edu.project3.renderers.TableRenderer;
 import java.util.List;
+import java.util.stream.Stream;
 import static edu.project3.log_sources.LogSourceFactory.getLogsSource;
 import static edu.project3.renderers.RendererFactory.getRenderer;
 
@@ -42,10 +43,9 @@ public class LogAnalyzer {
 
     private void run() {
         //получение логов
-        List<String> logs = source.getLogs();
+        Stream<String> logs = source.getLogs();
         //парсинг логов и пропуск через фильтры
         logs.forEach(log -> handler.processLog(logParser.parseLog(log)));
-        //рендер
         //вывод таблиц через принтер
         List<MetricsContainer> tables = handler.getTables();
         StringBuilder report = new StringBuilder();
@@ -54,13 +54,16 @@ public class LogAnalyzer {
         printer.printReport(report.toString());
     }
 
-    @SuppressWarnings("checkstyle:UncommentedMain")
-    public static void main(String[] args) {
-        //с консоли не запускал, только в идее аргументы менял
-        String input = String.join(" ", args);
-        //String input = "java -jar nginx-log-stats.jar --path https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs  --format markdown";
-        //String input = "java -jar nginx-log-stats.jar --path *  --format adoc";
-        //String input = "java -jar nginx-log-stats.jar --path *  --format markdown";
-        LogAnalyzer analyzer = new LogAnalyzer(input);
-    }
+//    @SuppressWarnings("checkstyle:UncommentedMain")
+//    public static void main(String[] args) {
+//        //с консоли не запускал, только в идее аргументы менял
+//        String input = String.join(" ", args);
+//        //различные варианты ввода для тестов
+//        //String input = "java -jar nginx-log-stats.jar --path https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs  --format markdown";
+//        //String input = "java -jar nginx-log-stats.jar --path *  --format adoc";
+//        //String input = "java -jar nginx-log-stats.jar --path *  --format markdown";
+//        LogAnalyzer analyzer = new LogAnalyzer(input);
+//
+//        //при использовании стримов выигрыш по памяти примерно в 1.5 раза, по времени - нет
+//    }
 }

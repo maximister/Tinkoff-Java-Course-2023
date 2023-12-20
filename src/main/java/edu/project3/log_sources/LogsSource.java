@@ -1,9 +1,9 @@
 package edu.project3.log_sources;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public interface LogsSource {
-    List<String> getLogs();
-
     String getSources();
+
+    Stream<String> getLogs();
 }

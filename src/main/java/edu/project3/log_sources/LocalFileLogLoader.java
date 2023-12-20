@@ -10,6 +10,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,23 +60,15 @@ public class LocalFileLogLoader implements LogsSource {
         return matchedFiles;
     }
 
-    private List<String> getLogsFromFile(Path path) {
-        try {
-            return Files.readAllLines(path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
-    public List<String> getLogs() {
-        List<String> logsList = new ArrayList<>();
-        files.forEach(file -> {
-            logsList.addAll(getLogsFromFile(file));
+    public Stream<String> getLogs() {
+        return files.stream().flatMap((file) -> {
+            try {
+                return Files.lines(file);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
-
-        LOGGER.info("Log list was created");
-        return logsList;
     }
 
     @Override
