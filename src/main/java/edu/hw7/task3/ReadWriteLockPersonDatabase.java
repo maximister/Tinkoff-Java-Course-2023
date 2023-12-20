@@ -9,42 +9,51 @@ public class ReadWriteLockPersonDatabase extends AbstractPersonDatabase {
 
     @Override
     public void add(Person person) {
-        readWriteLock.writeLock().lock();
-        super.add(person);
-        readWriteLock.writeLock().unlock();
+        try {
+            readWriteLock.writeLock().lock();
+            super.add(person);
+        } finally {
+            readWriteLock.writeLock().unlock();
+        }
     }
 
     @Override
     public void delete(int id) {
-        readWriteLock.writeLock().lock();
-        super.delete(id);
-        readWriteLock.writeLock().unlock();
+        try {
+            readWriteLock.writeLock().lock();
+            super.delete(id);
+        } finally {
+            readWriteLock.writeLock().unlock();
+        }
     }
 
     @Override
     public List<Person> findByName(String name) {
-        readWriteLock.readLock().lock();
-        List<Person> res = super.findByName(name);
-        readWriteLock.readLock().unlock();
-
-        return res;
+        try {
+            readWriteLock.readLock().lock();
+            return super.findByName(name);
+        } finally {
+            readWriteLock.readLock().unlock();
+        }
     }
 
     @Override
     public List<Person> findByAddress(String address) {
-        readWriteLock.readLock().lock();
-        List<Person> res = super.findByAddress(address);
-        readWriteLock.readLock().unlock();
-
-        return res;
+        try {
+            readWriteLock.readLock().lock();
+            return super.findByAddress(address);
+        } finally {
+            readWriteLock.readLock().unlock();
+        }
     }
 
     @Override
     public List<Person> findByPhone(String phone) {
-        readWriteLock.readLock().lock();
-        List<Person> res = super.findByPhone(phone);
-        readWriteLock.readLock().unlock();
-
-        return res;
+        try {
+            readWriteLock.readLock().lock();
+            return super.findByPhone(phone);
+        } finally {
+            readWriteLock.readLock().unlock();
+        }
     }
 }

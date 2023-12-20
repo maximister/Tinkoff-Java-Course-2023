@@ -15,11 +15,12 @@ public class AbstractPersonDatabase implements PersonDatabase {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public AbstractPersonDatabase() {
-        LOGGER.info("Database was created");
         idMap = new HashMap<>();
         cachedNames = new HashMap<>();
         cachedAddresses = new HashMap<>();
         cachedNumbers = new HashMap<>();
+
+        LOGGER.info("Database was created");
     }
 
     @SuppressWarnings("checkstyle:MultipleStringLiterals")
