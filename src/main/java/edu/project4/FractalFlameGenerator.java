@@ -49,9 +49,12 @@ public class FractalFlameGenerator {
 
 //    @SuppressWarnings({"checkstyle:UncommentedMain", "checkstyle:MagicNumber"})
 //    public static void main(String[] args) {
-//        double gamma = 0.7;
-//        int[] resolution = {2048, 1152};
-//        double[] aspectRatio = {9.0, 9.0};
+//        double gamma = 2.5;
+//        int[] resolution = {3840, 2160};
+//        //даже не знаю как правильнее назвать этот параметр. По факту он меняет разреженность картинки скажем так
+//        //т.е. при высоких значениях рисунок будет плотнее и сосредоточен в центре, а края пустые
+//        //при низких значениях рисунок будет разреженнее, но рассеится на большую площадь
+//        double[] aspectRatio = {16.0, 9.0};
 //        Path directoryPath = Path.of("src/main/java/edu/project4/images/");
 //        List<Transformation> variations = List.of(
 //            new DiskTransformation(),
@@ -67,13 +70,13 @@ public class FractalFlameGenerator {
 //        RenderSettings settings = RenderSettings.builder()
 //            .affineTransformationsAmount(10)
 //            .samples(20)
-//            .iterationsPerSample(1_000_000)
-//            .symmetry(2)
+//            .iterationsPerSample(10_000_000)
+//            .symmetry(4)
 //            .variations(variations)
-//            .threadsAmount(8)
+//            .threadsAmount(Runtime.getRuntime().availableProcessors())
 //            .build();
 //
 //        FractalFlameGenerator generator = new FractalFlameGenerator(settings, gamma, directoryPath);
-//        generator.run(aspectRatio, resolution, "test6", ImageFormat.PNG);
+//        generator.run(aspectRatio, resolution, "experiment6", ImageFormat.PNG);
 //    }
 }

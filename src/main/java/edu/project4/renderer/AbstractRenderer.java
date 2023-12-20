@@ -11,9 +11,7 @@ import edu.project4.utils.FractalFrameUtils;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public abstract class AbstractRenderer implements Renderer {
     //почему 20 - загадка дыры, так сказали умные люди в статье по ссылке)
     private static final int STEPS_FOR_NORMALIZATION = 20;
@@ -24,6 +22,25 @@ public abstract class AbstractRenderer implements Renderer {
     //количество осей симметрии - 1; значение 1 - нет симметрии
     protected final int symmetry;
     protected final List<Transformation> variations;
+
+    public AbstractRenderer(
+        int affineTransformationsAmount,
+        int samples,
+        int iterationsPerSample,
+        int symmetry,
+        List<Transformation> variations
+    ) {
+        if (affineTransformationsAmount <= 0 || samples <= 0
+            || iterationsPerSample <= 0 || symmetry <= 0 || variations.isEmpty()) {
+            throw new IllegalArgumentException("invalid renderer parameters");
+        }
+
+        this.affineTransformationsAmount = affineTransformationsAmount;
+        this.samples = samples;
+        this.iterationsPerSample = iterationsPerSample;
+        this.symmetry = symmetry;
+        this.variations = variations;
+    }
 
     @Override
     public FractalImage render(int width, int height, Rect world) {
