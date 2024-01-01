@@ -14,9 +14,9 @@ public class BillyHerringtonTestClass {
 
     public BillyHerringtonTestClass(
         @NotNull String name,
-        Boolean visitedGymToday,
+        @NotNull Boolean visitedGymToday,
         double byceps,
-        @Min(300) Integer price
+        @NotNull @Min(300) Integer price
     ) {
         this.name = name;
         this.visitedGymToday = visitedGymToday;
