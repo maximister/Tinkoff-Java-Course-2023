@@ -25,14 +25,7 @@ public class ImageCreator {
             .threadsAmount(Runtime.getRuntime().availableProcessors())
             .build();
 
-        Renderer renderer = RendererFactory.getRenderer(
-            settings.threadsAmount(),
-            settings.affineTransformationsAmount(),
-            settings.samples(),
-            settings.iterationsPerSample(),
-            settings.symmetry(),
-            settings.variations()
-        );
+        Renderer renderer = RendererFactory.getRenderer(settings);
 
         return renderer.render(
             resolution[0],

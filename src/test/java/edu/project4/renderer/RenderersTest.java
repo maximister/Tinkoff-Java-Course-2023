@@ -1,9 +1,12 @@
 package edu.project4.renderer;
 
 import edu.project4.transformations.DiskTransformation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,7 +50,7 @@ public class RenderersTest {
     @Test
     @DisplayName("testing renderers with correct parameters")
     public void renderers_shouldNotThrowExceptions() {
-        RenderSettings settings = getDefaultSettings();
+        RenderSettings settings = getDefaultSettings(1);
 
         assertDoesNotThrow(() -> new SingleThreadRenderer(
             settings.affineTransformationsAmount(),
@@ -69,36 +72,20 @@ public class RenderersTest {
 
     @Test
     @DisplayName("testing renderer factory")
-    public void rendererFactoryTest() {
-        RenderSettings settings = getDefaultSettings();
+    public void rendererFactoryTest() throws NoSuchFieldException, IllegalAccessException {
+        RenderSettings settings = getDefaultSettings(1);
+        Renderer singleThreadRenderer = RendererFactory.getRenderer(settings);
 
-        Renderer singleThreadRenderer = RendererFactory.getRenderer(1,
-            settings.affineTransformationsAmount(),
-            settings.samples(),
-            settings.iterationsPerSample(),
-            settings.symmetry(),
-            settings.variations()
-        );
-        Renderer multiTreadRenderer = RendererFactory.getRenderer(5,
-            settings.affineTransformationsAmount(),
-            settings.samples(),
-            settings.iterationsPerSample(),
-            settings.symmetry(),
-            settings.variations()
-        );
+        settings = getDefaultSettings(5);
+        Renderer multiTreadRenderer = RendererFactory.getRenderer(settings);
 
         assertTrue(singleThreadRenderer instanceof SingleThreadRenderer);
         assertTrue(multiTreadRenderer instanceof MultiThreadRenderer);
 
-        assertThrows(IllegalArgumentException.class,
-            () -> RendererFactory.getRenderer(0,
-                settings.affineTransformationsAmount(),
-                settings.samples(),
-                settings.iterationsPerSample(),
-                settings.symmetry(),
-                settings.variations()
-            ));
-
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> RendererFactory.getRenderer(getDefaultSettings(0))
+        );
     }
 
     private static Stream<Arguments> getInvalidSettings() {
@@ -146,14 +133,14 @@ public class RenderersTest {
         );
     }
 
-    public static RenderSettings getDefaultSettings() {
+    public static RenderSettings getDefaultSettings(int threads) {
         return RenderSettings.builder()
             .affineTransformationsAmount(1)
             .iterationsPerSample(1)
             .samples(1)
             .variations(List.of(new DiskTransformation()))
             .symmetry(1)
-            .threadsAmount(1)
+            .threadsAmount(threads)
             .build();
     }
 }

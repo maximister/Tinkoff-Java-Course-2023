@@ -18,14 +18,7 @@ public class FractalFlameGenerator {
     private final Path storageDirectory;
 
     public FractalFlameGenerator(RenderSettings settings, double gamma, Path storageDirectory) {
-        renderer = RendererFactory.getRenderer(
-            settings.threadsAmount(),
-            settings.affineTransformationsAmount(),
-            settings.samples(),
-            settings.iterationsPerSample(),
-            settings.symmetry(),
-            settings.variations()
-        );
+        renderer = RendererFactory.getRenderer(settings);
 
         //тут небольшой хардкод, тк процессор всего один,
         //но при увеличении количества можно сделать также, как с рендером

@@ -1,16 +1,11 @@
 package edu.project4.generatorTest;
 
 import edu.project4.FractalFlameGenerator;
-import edu.project4.FractalFlameReportGenerator;
 import edu.project4.imageCreator.ImageFormat;
-import edu.project4.renderer.RenderSettings;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import static edu.project4.renderer.RenderersTest.getDefaultSettings;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -25,7 +20,7 @@ public class FractalFlameGeneratorTest {
 
         assertDoesNotThrow(() -> {
             FractalFlameGenerator generator =
-                new FractalFlameGenerator(getDefaultSettings(), 1.5, storageDirectory);
+                new FractalFlameGenerator(getDefaultSettings(2), 1.5, storageDirectory);
             generator.run(aspectRatio, resolution, "test", ImageFormat.PNG);
 
             Files.delete(Path.of(storageDirectory.toString(), "test.PNG"));

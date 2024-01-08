@@ -7,13 +7,15 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class RendererFactory {
     public static Renderer getRenderer(
-        int threadsAmount,
-        int affineTransformationsAmount,
-        int samples,
-        int iterationsPerSample,
-        int symmetry,
-        List<Transformation> variations
+        RenderSettings settings
     ) {
+        int threadsAmount = settings.threadsAmount();
+        int affineTransformationsAmount = settings.affineTransformationsAmount();
+        int samples = settings.samples();
+        int iterationsPerSample = settings.iterationsPerSample();
+        int symmetry = settings.symmetry();
+        List<Transformation> variations = settings.variations();
+
         if (threadsAmount == 1) {
             return new SingleThreadRenderer(
                 affineTransformationsAmount,
