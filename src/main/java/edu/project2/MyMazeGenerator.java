@@ -81,10 +81,10 @@ public class MyMazeGenerator {
        run();
     }
 
-    /*
-    public static void main(String[] args) {
-        MyMazeGenerator myMaze = new MyMazeGenerator();
-        myMaze.run();
-    }
-     */
+
+//    public static void main(String[] args) {
+//        MyMazeGenerator myMaze = new MyMazeGenerator();
+//        myMaze.run();
+//    }
+
 }
