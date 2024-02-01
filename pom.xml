@@ -188,7 +188,6 @@
             <version>1.18.30</version>
             <scope>compile</scope>
         </dependency>
-    </dependencies>
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy-agent</artifactId>
@@ -198,12 +197,6 @@
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
             <version>${bytebuddy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>
