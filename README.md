@@ -6,7 +6,7 @@
 3. Reflection
 
 ## Projects
-#### All projects have unit-tests with junit and jupiter
+#### All projects have unit-tests with Junit and Mockito
 ### Hangman game
 A simple console game to train the basic java syntax
 #### Example
