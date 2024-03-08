@@ -6,23 +6,24 @@
 3. Reflection
 
 ### Projects
+#### All projects have unit-tests with junit and jupiter
 #### Hangman game
 A simple console game to train the basic java syntax
-##### Example
+#### Example
 ![image](https://github.com/maximister/Tinkoff-Java-Course-2023/assets/116444848/824772c8-4cdb-4bfb-8651-b73e85aaf687)
 
 #### Maze solver
 Maze generator and solver.
 A project for training collections and algorithms.
 Able to generate a maze of specified sizes using the BFS algorithm and the Prim algorithm, and then solve it using BFS and DFS
-##### Example 
+#### Example 
 ![image](https://github.com/maximister/Tinkoff-Java-Course-2023/assets/116444848/5addbe27-9c14-453c-b86e-dbb308632695)
 
 #### NGINX log analyzer
 A console application for compiling a report on specified syllables. Accepts a link to a page with logs or a path to a directory.
 It is able to generate a report in doc and markdown.
 It is written using Java Standard Libraries.
-##### Example of generated report
+#### Example of generated report
 
 #### Общая информация
 
@@ -78,7 +79,7 @@ It is written using Java Standard Libraries.
 
 #### Fractal flame
 Multithreading fractal flame generator.
-##### Example of generated picture
+#### Example of generated picture
 ![image](https://github.com/maximister/Tinkoff-Java-Course-2023/assets/116444848/a5de3f06-a5c9-407b-8979-732e23b7ee72)
 
 #### Reflection
